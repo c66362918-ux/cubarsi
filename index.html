@@ -275,8 +275,12 @@ function starSideCardHTML(playerName, isCountry, side) {
   const photo = stat && stat.photo ? `<img class="avatar" src="${stat.photo}" alt="" loading="lazy">` : '';
   const primaryNum = isCountry ? (stat && stat.national_number) : (stat && stat.number);
   const numHTML = primaryNum ? `<span class="squad-num">${primaryNum}</span>` : '';
+  const clubNumHTML = stat && stat.number ? `<span class="squad-num">${stat.number}</span>` : '';
+  const clubCrestHTML = stat && stat.club_crest ? `<img src="${stat.club_crest}" alt="" loading="lazy">` : '';
   const clubAffil = (isCountry && stat && stat.club && stat.club_crest) ?
-    `<div class="club-affil"><img src="${stat.club_crest}" alt="" loading="lazy">${stat.club}${stat.number ? ` <span class="squad-num">${stat.number}</span>` : ''}</div>` : '';
+    (side === 'b' ?
+      `<div class="club-affil">${clubNumHTML}${stat.club}${clubCrestHTML}</div>` :
+      `<div class="club-affil">${clubCrestHTML}${stat.club}${clubNumHTML}</div>`) : '';
   return `<div class="star-side-${side}"><div class="star-line">${photo}<span class="star-name">${playerName}</span>${numHTML}</div>${clubAffil}</div>`;
 }
 
