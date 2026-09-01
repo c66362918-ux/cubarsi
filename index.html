@@ -186,6 +186,11 @@ main { padding: 12px 16px 0; }
 .video-linkout-text { min-width: 0; }
 .video-linkout-title { font-size: 17px; font-weight: 600; overflow-wrap: break-word; }
 .video-linkout .video-caption { color: #b8b6c8; }
+.match-overview {
+  background: #2c2c2e; border-radius: 18px; padding: 18px 22px;
+  margin-top: 12px; color: #c8c8c8; font-size: 17px; line-height: 2;
+}
+.match-overview .og { color: #9a9a9c; }
 
 .tbc-card {
   background: var(--surface); border: 1px dashed var(--line); border-radius: 14px;
@@ -285,10 +290,17 @@ function renderFixtureCards(container, list) {
       </div>
       <div class="card-meta">${badgeHtml(f)}<span class="badge venue">${f.venue}</span></div>
       <div class="card-stars">${stars}</div>
-      ${(d < new Date() && VIDEOS[f.id]) ? videoEmbedHTML(VIDEOS[f.id]) : ''}
+      ${(d < new Date() && VIDEOS[f.id]) ? videoEmbedHTML(VIDEOS[f.id]) + matchOverviewHTML(f.id) : ''}
     </div>`;
   });
   container.innerHTML = html;
+}
+
+function matchOverviewHTML(fixtureId) {
+  const events = MATCH_EVENTS[fixtureId];
+  if (!events || !events.length) return '';
+  const lines = events.map(e => `<div>${e.scorer} ${e.minute}${e.og ? ' <span class="og">(烏龍球)</span>' : ''}</div>`).join('');
+  return `<div class="match-overview">${lines}</div>`;
 }
 
 function videoEmbedHTML(v) {
