@@ -147,17 +147,20 @@ const VIDEOS = {
   "bha-che-0830": {"id": "1QvHaCXnIWg", "channel": "Chelsea Football Club 官方頻道", "title": "Chelsea 4-3 Brighton | HIGHLIGHTS | Premier League 2026/27"},
   "nap-com-0831": {"id": "gCL4nQnqr9Y", "channel": "Serie A 官方頻道", "title": "Entertaining First Half Rewards Como! | NAPOLI-COMO | HIGHLIGHTS"},
   "mal-rma-0830": {"id": "y-J_ZKFyWX8", "channel": "Real Madrid 官方頻道", "title": "HIGHLIGHTS | Real Madrid 4-0 Malaga CF | LaLiga"},
-  "avl-ars-0901": {"id": "-6Rqtz7c7pw", "channel": "Arsenal 官方頻道", "title": "HIGHLIGHTS | Aston Villa vs Arsenal (0-1) | SAKA STRIKES!"}
+  "avl-ars-0901": {"id": "-6Rqtz7c7pw", "channel": "Arsenal 官方頻道", "title": "HIGHLIGHTS | Aston Villa vs Arsenal (0-1) | SAKA STRIKES!"},
+  "bar-ray-0831": {"type": "dazn", "url": "https://www.dazn.com/zh-TW/fixture/ContentId:yxfl7zzylqdr08n7zjpol91de0/yxfl7zzylqdr08n7zjpol91de0/awuz9j091nokiyg6vx4nqz2ji", "channel": "DAZN（需登入訂閱帳號觀看）", "title": "巴塞隆納 vs 巴列卡諾：第3輪 濃縮精華"}
 };
 
+const GENERIC_VIDEOS = {};
+
 const COMPETITION_LOGOS = {
-  "Premier League": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Premier_League.svg",
+  "Premier League": "https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg",
   "La Liga": "https://upload.wikimedia.org/wikipedia/commons/0/0f/LaLiga_logo_2023.svg",
   "Serie A": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Serie_A_logo_2022.svg",
   "Bundesliga": "https://upload.wikimedia.org/wikipedia/commons/1/15/Bundesliga_logo.svg",
   "Ligue 1": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Ligue1.svg",
-  "UEFA Champions League": "https://upload.wikimedia.org/wikipedia/commons/0/0a/UEFA_Champions_League_logo.svg",
+  "UEFA Champions League": "https://upload.wikimedia.org/wikipedia/en/f/f5/UEFA_Champions_League.svg",
   "Carabao Cup": "https://upload.wikimedia.org/wikipedia/en/0/0c/EFL_%28Carabao%29_Cup_Logo.svg",
   "DFB-Pokal": "https://upload.wikimedia.org/wikipedia/commons/2/2a/DFB-Pokal_Wordmark.svg",
-  "UEFA Nations League": "https://upload.wikimedia.org/wikipedia/commons/b/bf/UEFA_Nations_League_Cup.svg"
+  "UEFA Nations League": "https://upload.wikimedia.org/wikipedia/en/8/80/UEFA_Nations_League.svg"
 };
