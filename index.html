@@ -156,9 +156,15 @@ main { padding: 12px 16px 0; }
 .badge.none { background: var(--none-bg); color: var(--none-ink); font-weight: 500; }
 .badge.venue { background: none; border: 1px solid var(--line); color: var(--ink-muted); font-weight: 500; }
 
-.card-stars { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
-.card-star { font-size: 20px; color: var(--ink-muted); }
+.card-stars { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+.card-star { font-size: 20px; color: var(--ink-muted); display: flex; align-items: center; gap: 10px; }
 .card-star b { color: var(--ink); font-weight: 600; }
+.card-star img.avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--line); flex: none; }
+.card-star .star-text { display: flex; flex-direction: column; gap: 2px; }
+.card-star .squad-num { display: inline-block; margin-left: 6px; padding: 1px 7px; font-weight: 800; font-size: 15px; color: #fff; background: var(--accent); border-radius: 5px; vertical-align: middle; }
+.card-star .club-affil { display: flex; align-items: center; gap: 5px; font-size: 15px; color: var(--ink-muted); opacity: 0.85; }
+.card-star .club-affil img { width: 18px; height: 18px; object-fit: contain; flex: none; }
+.card-star .club-affil .squad-num { font-size: 13px; padding: 0 5px; }
 
 .card-note { margin-top: 14px; font-size: 18px; color: var(--ink-muted); line-height: 1.6; border-top: 1px dashed var(--line); padding-top: 14px; }
 
@@ -241,6 +247,15 @@ function badgeHtml(f) {
   return `<span class="badge ${cls}"><span class="bdot"></span>${b}</span>`;
 }
 
+function starCardHTML(playerName, teamLabel, isCountry) {
+  const stat = PLAYER_STATS[playerName];
+  const photo = stat && stat.photo ? `<img class="avatar" src="${stat.photo}" alt="" loading="lazy">` : '';
+  const numHTML = stat && stat.number ? `<span class="squad-num">#${stat.number}</span>` : '';
+  const clubAffil = (isCountry && stat && stat.club && stat.club_crest) ?
+    `<div class="club-affil"><img src="${stat.club_crest}" alt="" loading="lazy">${stat.club}${stat.number ? ` <span class="squad-num">#${stat.number}</span>` : ''}</div>` : '';
+  return `<div class="card-star">${photo}<div class="star-text"><div><b>${playerName}</b>${numHTML} · ${teamLabel}</div>${clubAffil}</div></div>`;
+}
+
 function renderFixtureCards(container, list) {
   const sorted = [...list].sort((a,b) => new Date(a.kickoff) - new Date(b.kickoff));
   let lastKey = null;
@@ -256,7 +271,7 @@ function renderFixtureCards(container, list) {
     const awayT = f.tracked.includes(f.away);
     const stars = f.tracked.map(name => {
       const c = CLUBS[name];
-      return c ? `<div class="card-star"><b>${c.player_name}</b> · ${name}</div>` : '';
+      return c ? starCardHTML(c.player_name, name, false) : '';
     }).join('');
     html += `<div class="card" data-tracked="${f.tracked.join(',')}">
       <div class="card-head">
@@ -311,8 +326,8 @@ function renderGenericCards(container, list, withNotes) {
       html += `<div class="date-hd">${fmtDateHeader(d)}<span class="wd">${WD[d.getDay()]}</span></div>`;
     }
     const hi = lookupInfo(m.home), ai = lookupInfo(m.away);
-    const stars = (hi ? `<div class="card-star"><b>${hi.player}</b> · ${m.home}</div>` : '') +
-                  (ai ? `<div class="card-star"><b>${ai.player}</b> · ${m.away}</div>` : '');
+    const stars = (hi ? starCardHTML(hi.player, m.home, !!COUNTRY_INFO[m.home]) : '') +
+                  (ai ? starCardHTML(ai.player, m.away, !!COUNTRY_INFO[m.away]) : '');
     const note = withNotes ? (UCL_NOTES[`${m.home}|${m.away}`] || '') : '';
     const genericVideo = GENERIC_VIDEOS[`${m.home}|${m.away}`];
     html += `<div class="card">
