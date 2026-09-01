@@ -83,11 +83,13 @@ nav.tabs {
 }
 nav.tabs::-webkit-scrollbar { display: none; }
 nav.tabs button {
-  flex: none; font-family: "Noto Sans TC", sans-serif; font-size: 22px; font-weight: 600;
-  padding: 14px 22px; border-radius: 999px; border: 1px solid var(--line);
+  flex: none; display: inline-flex; align-items: center; gap: 8px;
+  font-family: "Noto Sans TC", sans-serif; font-size: 22px; font-weight: 600;
+  padding: 10px 22px; border-radius: 999px; border: 1px solid var(--line);
   background: var(--surface); color: var(--ink-muted);
   white-space: nowrap;
 }
+nav.tabs button img { width: 32px; height: 32px; object-fit: contain; background: #fff; border-radius: 7px; padding: 3px; }
 nav.tabs button.active { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 
 .clubrow {
@@ -129,8 +131,8 @@ main { padding: 12px 16px 0; }
   font-variant-numeric: tabular-nums; color: var(--accent); flex: none;
 }
 .card-time .approx { font-size: 14px; color: var(--accent); font-weight: 600; margin-left: 4px; }
-.card-comp { display: inline-flex; align-items: center; gap: 6px; font-family: "IBM Plex Mono", monospace; font-size: 15px; color: var(--ink-muted); text-align: right; }
-.card-comp img { width: 20px; height: 20px; object-fit: contain; }
+.card-comp { display: inline-flex; align-items: center; gap: 8px; font-family: "IBM Plex Mono", monospace; font-size: 15px; color: var(--ink-muted); text-align: right; }
+.card-comp img { width: 42px; height: 42px; object-fit: contain; background: #fff; border-radius: 8px; padding: 3px; }
 .card-teams { display: flex; flex-direction: column; gap: 9px; }
 .card-teams .tm { display: flex; align-items: center; gap: 13px; font-size: 29px; font-weight: 600; line-height: 1.25; }
 .card-teams .tm span { flex: 1; min-width: 0; overflow-wrap: break-word; }
@@ -345,8 +347,8 @@ function build() {
       <nav class="tabs">
         <button data-tab="panel-tracked" class="active">追蹤球隊 ${FIXTURES.length}</button>
         <button data-tab="panel-tbc">時間未定 ${TBC.length}</button>
-        <button data-tab="panel-ucl">歐冠 ${UCL_ALL.length}</button>
-        <button data-tab="panel-unl">歐國聯 ${UNL_ALL.length}</button>
+        <button data-tab="panel-ucl"><img src="${COMPETITION_LOGOS['UEFA Champions League']}" alt="">歐冠 ${UCL_ALL.length}</button>
+        <button data-tab="panel-unl"><img src="${COMPETITION_LOGOS['UEFA Nations League']}" alt="">歐國聯 ${UNL_ALL.length}</button>
       </nav>
     </header>
     <div class="clubrow" id="clubrow"></div>
@@ -356,7 +358,7 @@ function build() {
       <div class="panel" id="panel-ucl"></div>
       <div class="panel" id="panel-unl"></div>
       <footer>
-        <div><strong>轉播說明：</strong>巴塞隆納、皇家馬德里的西甲賽事由 <strong>DAZN2（74台）</strong>轉播；兩隊的歐冠賽事及其餘9隊所有賽事由<strong>愛爾達 ELTA</strong>轉播（已標示實際頻道）。</div>
+        <div><strong>轉播說明：</strong>巴塞隆納、皇家馬德里的西甲賽事由 <strong>DAZN2（MOD 214台）</strong>轉播；兩隊的歐冠賽事及其餘9隊所有賽事由<strong>愛爾達 ELTA</strong>轉播（已標示實際頻道）。</div>
         <div><strong>無轉播確認：</strong>英格蘭聯賽盃、德國盃不在愛爾達轉播項目中，目前查無台灣轉播。</div>
         <div>9/21–9/24 國際賽週期五大聯賽暫無賽事；9/25起為歐國聯比賽週（見上方分頁）。</div>
         <div>資料整理：2026-08-31</div>

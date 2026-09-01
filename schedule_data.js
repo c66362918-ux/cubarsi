@@ -14,21 +14,21 @@ const CLUBS = {
 
 const FIXTURES = [
   {"id": "bha-che-0830", "kickoff": "2026-08-30T20:50:00+08:00", "competition": "Premier League", "home": "Brighton & Hove Albion", "away": "Chelsea", "venue": "Falmer Stadium", "tracked": ["Chelsea"], "approx": false, "broadcaster": "愛爾達 ELTA", "display": "愛爾達 體育1台", "note": ""},
-  {"id": "mal-rma-0830", "kickoff": "2026-08-30T22:00:00+08:00", "competition": "La Liga", "home": "Malaga", "away": "Real Madrid", "venue": "La Rosaleda", "tracked": ["Real Madrid"], "approx": true, "broadcaster": "DAZN", "display": "DAZN2 (74台)", "note": ""},
+  {"id": "mal-rma-0830", "kickoff": "2026-08-30T22:00:00+08:00", "competition": "La Liga", "home": "Malaga", "away": "Real Madrid", "venue": "La Rosaleda", "tracked": ["Real Madrid"], "approx": true, "broadcaster": "DAZN", "display": "DAZN2 (MOD 214台)", "note": ""},
   {"id": "mun-ips-0830", "kickoff": "2026-08-30T23:20:00+08:00", "competition": "Premier League", "home": "Manchester United", "away": "Ipswich Town", "venue": "Old Trafford", "tracked": ["Manchester United"], "approx": false, "broadcaster": "愛爾達 ELTA", "display": "愛爾達 體育1台", "note": ""},
   {"id": "nap-com-0831", "kickoff": "2026-08-31T00:15:00+08:00", "competition": "Serie A", "home": "Napoli", "away": "Como", "venue": "Stadio Diego Armando Maradona", "tracked": ["Napoli"], "approx": false, "broadcaster": "愛爾達 ELTA", "display": "愛爾達 體育2台", "note": ""},
-  {"id": "bar-ray-0831", "kickoff": "2026-08-31T03:30:00+08:00", "competition": "La Liga", "home": "Barcelona", "away": "Rayo Vallecano", "venue": "Campo de Futbol de Vallecas", "tracked": ["Barcelona"], "approx": false, "broadcaster": "DAZN", "display": "DAZN2 (74台)", "note": ""},
+  {"id": "bar-ray-0831", "kickoff": "2026-08-31T03:30:00+08:00", "competition": "La Liga", "home": "Barcelona", "away": "Rayo Vallecano", "venue": "Campo de Futbol de Vallecas", "tracked": ["Barcelona"], "approx": false, "broadcaster": "DAZN", "display": "DAZN2 (MOD 214台)", "note": ""},
   {"id": "avl-ars-0901", "kickoff": "2026-09-01T02:50:00+08:00", "competition": "Premier League", "home": "Aston Villa", "away": "Arsenal", "venue": "Villa Park", "tracked": ["Arsenal"], "approx": false, "broadcaster": "愛爾達 ELTA", "display": "愛爾達 體育1台", "note": ""},
   {"id": "osn-bay-0903", "kickoff": "2026-09-03T02:45:00+08:00", "competition": "DFB-Pokal", "home": "VfL Osnabruck", "away": "Bayern Munich", "venue": "Bremer Brucke", "tracked": ["Bayern Munich"], "approx": false, "broadcaster": "愛爾達 ELTA", "display": "台灣無確認轉播", "note": "ELTA does not carry DFB-Pokal (not in their category list) - no confirmed Taiwan broadcast found"},
   {"id": "ips-liv-0905", "kickoff": "2026-09-05T02:50:00+08:00", "competition": "Premier League", "home": "Ipswich Town", "away": "Liverpool", "venue": "Portman Road", "tracked": ["Liverpool"], "approx": false, "broadcaster": "愛爾達 ELTA", "display": "愛爾達 體育2台", "note": ""},
   {"id": "psg-mon-0905", "kickoff": "2026-09-05T02:50:00+08:00", "competition": "Ligue 1", "home": "Paris Saint-Germain", "away": "AS Monaco", "venue": "Parc des Princes", "tracked": ["Paris Saint-Germain"], "approx": false, "broadcaster": "愛爾達 ELTA", "display": "愛爾達 體育MAX2台", "note": ""},
-  {"id": "bet-rma-0905", "kickoff": "2026-09-05T02:55:00+08:00", "competition": "La Liga", "home": "Real Betis", "away": "Real Madrid", "venue": "Benito Villamarin", "tracked": ["Real Madrid"], "approx": false, "broadcaster": "DAZN", "display": "DAZN2 (74台)", "note": ""},
+  {"id": "bet-rma-0905", "kickoff": "2026-09-05T02:55:00+08:00", "competition": "La Liga", "home": "Real Betis", "away": "Real Madrid", "venue": "Benito Villamarin", "tracked": ["Real Madrid"], "approx": false, "broadcaster": "DAZN", "display": "DAZN2 (MOD 214台)", "note": ""},
   {"id": "mci-cov-0905", "kickoff": "2026-09-05T21:50:00+08:00", "competition": "Premier League", "home": "Manchester City", "away": "Coventry City", "venue": "Etihad Stadium", "tracked": ["Manchester City"], "approx": false, "broadcaster": "愛爾達 ELTA", "display": "愛爾達 體育2台", "note": ""},
   {"id": "nfo-tot-0905", "kickoff": "2026-09-05T21:50:00+08:00", "competition": "Premier League", "home": "Nottingham Forest", "away": "Tottenham Hotspur", "venue": "City Ground", "tracked": ["Tottenham Hotspur"], "approx": false, "broadcaster": "愛爾達 ELTA", "display": "愛爾達 體育MAX7台", "note": ""},
   {"id": "int-nap-0906", "kickoff": "2026-09-05T23:45:00+08:00", "competition": "Serie A", "home": "Inter Milan", "away": "Napoli", "venue": "San Siro", "tracked": ["Napoli"], "approx": false, "broadcaster": "愛爾達 ELTA", "display": "愛爾達 體育3台", "note": "ELTA lists this under 9/5 broadcast day (kickoff 23:45 Taiwan time, not past midnight)"},
   {"id": "s04-bay-0906", "kickoff": "2026-09-06T00:20:00+08:00", "competition": "Bundesliga", "home": "Schalke 04", "away": "Bayern Munich", "venue": "Veltins-Arena", "tracked": ["Bayern Munich"], "approx": false, "broadcaster": "愛爾達 ELTA", "display": "愛爾達 體育MAX2台", "note": ""},
   {"id": "eve-mun-0906", "kickoff": "2026-09-06T20:50:00+08:00", "competition": "Premier League", "home": "Everton", "away": "Manchester United", "venue": "Hill Dickinson Stadium", "tracked": ["Manchester United"], "approx": false, "broadcaster": "愛爾達 ELTA", "display": "愛爾達 體育2台", "note": ""},
-  {"id": "val-bar-0906", "kickoff": "2026-09-06T22:10:00+08:00", "competition": "La Liga", "home": "Valencia", "away": "Barcelona", "venue": "Mestalla", "tracked": ["Barcelona"], "approx": false, "broadcaster": "DAZN", "display": "DAZN2 (74台)", "note": ""},
+  {"id": "val-bar-0906", "kickoff": "2026-09-06T22:10:00+08:00", "competition": "La Liga", "home": "Valencia", "away": "Barcelona", "venue": "Mestalla", "tracked": ["Barcelona"], "approx": false, "broadcaster": "DAZN", "display": "DAZN2 (MOD 214台)", "note": ""},
   {"id": "ars-che-0906", "kickoff": "2026-09-06T23:20:00+08:00", "competition": "Premier League", "home": "Arsenal", "away": "Chelsea", "venue": "Emirates Stadium", "tracked": ["Arsenal", "Chelsea"], "approx": false, "broadcaster": "愛爾達 ELTA", "display": "愛爾達 體育2台", "note": ""},
   {"id": "rma-int-0909", "kickoff": "2026-09-09T02:50:00+08:00", "competition": "UEFA Champions League", "home": "Real Madrid", "away": "Inter Milan", "venue": "Santiago Bernabeu", "tracked": ["Real Madrid"], "approx": false, "broadcaster": "愛爾達 ELTA", "display": "愛爾達 體育2台", "note": ""},
   {"id": "bar-fey-0910", "kickoff": "2026-09-10T00:35:00+08:00", "competition": "UEFA Champions League", "home": "Barcelona", "away": "Feyenoord", "venue": "Spotify Camp Nou", "tracked": ["Barcelona"], "approx": false, "broadcaster": "愛爾達 ELTA", "display": "愛爾達 體育1台", "note": ""},
@@ -62,12 +62,12 @@ const FIXTURES = [
 ];
 
 const TBC = [
-  {"competition":"La Liga","home":"Real Madrid","away":"Rayo Vallecano","venue":"Santiago Bernabeu","tracked":["Real Madrid"],"broadcaster":"DAZN2 (74台)","weekOf":"9/13 那一輪"},
-  {"competition":"La Liga","home":"Levante","away":"Barcelona","venue":"Ciutat de Valencia","tracked":["Barcelona"],"broadcaster":"DAZN2 (74台)","weekOf":"9/13 那一輪"},
-  {"competition":"La Liga","home":"Elche","away":"Real Madrid","venue":"Estadio Manuel Martinez Valero","tracked":["Real Madrid"],"broadcaster":"DAZN2 (74台)","weekOf":"9/16 那一輪"},
-  {"competition":"La Liga","home":"Barcelona","away":"Racing Santander","venue":"Spotify Camp Nou","tracked":["Barcelona"],"broadcaster":"DAZN2 (74台)","weekOf":"9/16 那一輪"},
-  {"competition":"La Liga","home":"Atletico Madrid","away":"Real Madrid","venue":"Estadio Metropolitano","tracked":["Real Madrid"],"broadcaster":"DAZN2 (74台)","weekOf":"9/20 那一輪 (馬德里德比)"},
-  {"competition":"La Liga","home":"Sevilla","away":"Barcelona","venue":"Ramon Sanchez-Pizjuan","tracked":["Barcelona"],"broadcaster":"DAZN2 (74台)","weekOf":"9/20 那一輪"}
+  {"competition":"La Liga","home":"Real Madrid","away":"Rayo Vallecano","venue":"Santiago Bernabeu","tracked":["Real Madrid"],"broadcaster":"DAZN2 (MOD 214台)","weekOf":"9/13 那一輪"},
+  {"competition":"La Liga","home":"Levante","away":"Barcelona","venue":"Ciutat de Valencia","tracked":["Barcelona"],"broadcaster":"DAZN2 (MOD 214台)","weekOf":"9/13 那一輪"},
+  {"competition":"La Liga","home":"Elche","away":"Real Madrid","venue":"Estadio Manuel Martinez Valero","tracked":["Real Madrid"],"broadcaster":"DAZN2 (MOD 214台)","weekOf":"9/16 那一輪"},
+  {"competition":"La Liga","home":"Barcelona","away":"Racing Santander","venue":"Spotify Camp Nou","tracked":["Barcelona"],"broadcaster":"DAZN2 (MOD 214台)","weekOf":"9/16 那一輪"},
+  {"competition":"La Liga","home":"Atletico Madrid","away":"Real Madrid","venue":"Estadio Metropolitano","tracked":["Real Madrid"],"broadcaster":"DAZN2 (MOD 214台)","weekOf":"9/20 那一輪 (馬德里德比)"},
+  {"competition":"La Liga","home":"Sevilla","away":"Barcelona","venue":"Ramon Sanchez-Pizjuan","tracked":["Barcelona"],"broadcaster":"DAZN2 (MOD 214台)","weekOf":"9/20 那一輪"}
 ];
 
 const UCL_ALL = [
@@ -147,8 +147,7 @@ const VIDEOS = {
   "bha-che-0830": {"id": "1QvHaCXnIWg", "channel": "Chelsea Football Club 官方頻道", "title": "Chelsea 4-3 Brighton | HIGHLIGHTS | Premier League 2026/27"},
   "nap-com-0831": {"id": "gCL4nQnqr9Y", "channel": "Serie A 官方頻道", "title": "Entertaining First Half Rewards Como! | NAPOLI-COMO | HIGHLIGHTS"},
   "mal-rma-0830": {"id": "y-J_ZKFyWX8", "channel": "Real Madrid 官方頻道", "title": "HIGHLIGHTS | Real Madrid 4-0 Malaga CF | LaLiga"},
-  "avl-ars-0901": {"id": "NB1R8bIK5L0", "channel": "Stan Sport Football（轉播方頻道，非官方）", "title": "Aston Villa v Arsenal | Highlights | Premier League 2026/27"},
-  "bar-ray-0831": {"id": "9k1pUqHpGqs", "channel": "DAZN ES（西甲轉播方頻道，非官方）", "title": "FC Barcelona vs Rayo Vallecano (5-2) | Resumen y goles"}
+  "avl-ars-0901": {"id": "-6Rqtz7c7pw", "channel": "Arsenal 官方頻道", "title": "HIGHLIGHTS | Aston Villa vs Arsenal (0-1) | SAKA STRIKES!"}
 };
 
 const COMPETITION_LOGOS = {
