@@ -48,7 +48,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: "Noto Sans TC", "IBM Plex Mono", sans-serif;
-  font-size: 17px;
+  font-size: 19px;
   -webkit-font-smoothing: antialiased;
   padding-bottom: 40px;
 }
@@ -61,85 +61,87 @@ header.top {
 }
 .eyebrow {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 14px; letter-spacing: .08em; text-transform: uppercase;
+  font-size: 15px; letter-spacing: .06em; text-transform: uppercase;
   color: var(--accent); font-weight: 600;
 }
 h1 {
   font-family: "Oswald", "Noto Sans TC", sans-serif;
-  font-weight: 600; font-size: 36px; margin: 4px 0 12px;
+  font-weight: 600; font-size: 42px; margin: 5px 0 14px;
 }
 .callout {
-  display: flex; gap: 9px; align-items: flex-start;
-  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
-  padding: 13px 15px; margin-bottom: 12px; font-size: 17px; color: var(--ink-muted);
+  display: flex; gap: 10px; align-items: flex-start;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+  padding: 15px 17px; margin-bottom: 14px; font-size: 19px; color: var(--ink-muted);
   line-height: 1.5;
 }
 .callout strong { color: var(--ink); }
-.dot { width: 8px; height: 8px; border-radius: 50%; background: #4a9a5c; flex: none; margin-top: 6px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: #4a9a5c; flex: none; margin-top: 7px; }
 
 nav.tabs {
-  display: flex; gap: 7px; overflow-x: auto; padding: 4px 0 12px;
+  display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 14px;
   -ms-overflow-style: none; scrollbar-width: none;
 }
 nav.tabs::-webkit-scrollbar { display: none; }
 nav.tabs button {
-  flex: none; font-family: "Noto Sans TC", sans-serif; font-size: 18px; font-weight: 600;
-  padding: 12px 18px; border-radius: 999px; border: 1px solid var(--line);
+  flex: none; font-family: "Noto Sans TC", sans-serif; font-size: 20px; font-weight: 600;
+  padding: 13px 20px; border-radius: 999px; border: 1px solid var(--line);
   background: var(--surface); color: var(--ink-muted);
   white-space: nowrap;
 }
 nav.tabs button.active { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 
 .clubrow {
-  display: flex; gap: 8px; overflow-x: auto; padding: 0 16px 14px;
+  display: flex; gap: 9px; overflow-x: auto; padding: 0 16px 16px;
   -ms-overflow-style: none; scrollbar-width: none;
 }
 .clubrow::-webkit-scrollbar { display: none; }
 .clubchip {
-  flex: none; display: flex; align-items: center; gap: 7px;
+  flex: none; display: flex; align-items: center; gap: 8px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
-  padding: 9px 16px 9px 10px; font-size: 17px; font-weight: 500; color: var(--ink);
+  padding: 10px 18px 10px 12px; font-size: 19px; font-weight: 500; color: var(--ink);
 }
-.clubchip img { width: 24px; height: 24px; object-fit: contain; }
+.clubchip img { width: 27px; height: 27px; object-fit: contain; }
 .clubchip.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .clubchip.reset { font-family: "IBM Plex Mono", monospace; }
 
 main { padding: 12px 16px 0; }
 
 .date-hd {
-  font-family: "Oswald", sans-serif; font-weight: 600; font-size: 22px;
+  font-family: "Oswald", sans-serif; font-weight: 600; font-size: 25px;
   color: var(--ink); background: var(--surface-alt);
-  border-radius: 8px; padding: 10px 15px; margin: 20px 0 11px;
-  display: flex; align-items: baseline; gap: 10px;
+  border-radius: 10px; padding: 12px 17px; margin: 22px 0 13px;
+  display: flex; align-items: baseline; gap: 11px;
 }
 .date-hd:first-child { margin-top: 4px; }
-.date-hd .wd { font-family: "IBM Plex Mono", monospace; font-size: 16px; color: var(--ink-muted); font-weight: 500; }
+.date-hd .wd { font-family: "IBM Plex Mono", monospace; font-size: 18px; color: var(--ink-muted); font-weight: 500; }
 
 .card {
-  background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
-  box-shadow: var(--shadow); padding: 16px 17px; margin-bottom: 13px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
+  box-shadow: var(--shadow); padding: 18px 19px; margin-bottom: 15px;
 }
 .card.hidden { display: none; }
-.card-top { display: flex; align-items: center; gap: 13px; }
-.card-time {
-  font-family: "IBM Plex Mono", monospace; font-weight: 700; font-size: 27px;
-  font-variant-numeric: tabular-nums; flex: none; min-width: 74px;
+.card-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  margin-bottom: 12px;
 }
-.card-time .approx { display: block; font-size: 12.5px; color: var(--accent); font-weight: 600; }
-.card-matchup { flex: 1; min-width: 0; }
-.card-teams { display: flex; align-items: center; gap: 8px; font-size: 21px; font-weight: 500; flex-wrap: wrap; }
-.card-teams img { width: 29px; height: 29px; object-fit: contain; flex: none; }
-.card-teams .tm { display: flex; align-items: center; gap: 7px; }
-.card-teams .tm.tracked { font-weight: 700; }
-.card-teams .vs { color: var(--ink-muted); font-family: "IBM Plex Mono", monospace; font-size: 15px; }
-.card-comp { font-family: "IBM Plex Mono", monospace; font-size: 15px; color: var(--ink-muted); margin-top: 4px; }
+.card-time {
+  font-family: "IBM Plex Mono", monospace; font-weight: 700; font-size: 24px;
+  font-variant-numeric: tabular-nums; color: var(--accent); flex: none;
+}
+.card-time .approx { font-size: 13px; color: var(--accent); font-weight: 600; margin-left: 4px; }
+.card-comp { font-family: "IBM Plex Mono", monospace; font-size: 14px; color: var(--ink-muted); text-align: right; }
+.card-teams { display: flex; flex-direction: column; gap: 8px; }
+.card-teams .tm { display: flex; align-items: center; gap: 12px; font-size: 25px; font-weight: 600; line-height: 1.25; }
+.card-teams img { width: 34px; height: 34px; object-fit: contain; flex: none; }
+.card-teams .tm.tracked { font-weight: 800; }
+.card-teams .vs { color: var(--ink-muted); font-family: "IBM Plex Mono", monospace; font-size: 14px; padding-left: 46px; margin: -3px 0; }
 
-.card-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 13px; }
+.card-meta { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; margin-top: 15px; }
 .badge {
   display: inline-flex; align-items: center; gap: 7px; border-radius: 999px;
-  padding: 7px 13px; font-size: 16px; font-weight: 600; white-space: nowrap;
+  padding: 8px 15px; font-size: 17px; font-weight: 600; white-space: nowrap;
 }
-.badge .bdot { width: 7px; height: 7px; border-radius: 50%; }
+.badge .bdot { width: 8px; height: 8px; border-radius: 50%; }
 .badge.dazn { background: var(--dazn-bg); color: var(--dazn-ink); }
 .badge.dazn .bdot { background: var(--dazn-dot); }
 .badge.elta { background: var(--elta-bg); color: var(--elta-ink); }
@@ -149,25 +151,27 @@ main { padding: 12px 16px 0; }
 .badge.none { background: var(--none-bg); color: var(--none-ink); font-weight: 500; }
 .badge.venue { background: none; border: 1px solid var(--line); color: var(--ink-muted); font-weight: 500; }
 
-.card-stars { margin-top: 11px; display: flex; flex-direction: column; gap: 6px; }
-.card-star { font-size: 17px; color: var(--ink-muted); }
+.card-stars { margin-top: 13px; display: flex; flex-direction: column; gap: 7px; }
+.card-star { font-size: 18px; color: var(--ink-muted); }
 .card-star b { color: var(--ink); font-weight: 600; }
 
-.card-note { margin-top: 11px; font-size: 16px; color: var(--ink-muted); line-height: 1.6; border-top: 1px dashed var(--line); padding-top: 11px; }
+.card-note { margin-top: 13px; font-size: 17px; color: var(--ink-muted); line-height: 1.6; border-top: 1px dashed var(--line); padding-top: 13px; }
 
 .tbc-card {
-  background: var(--surface); border: 1px dashed var(--line); border-radius: 12px;
-  padding: 14px 16px; margin-bottom: 10px; font-size: 17px; color: var(--ink-muted);
+  background: var(--surface); border: 1px dashed var(--line); border-radius: 14px;
+  padding: 16px 18px; margin-bottom: 11px; font-size: 18px; color: var(--ink-muted);
 }
-.tbc-card .card-teams { margin-bottom: 6px; }
-.tbc-card .weekof { font-size: 15px; }
+.tbc-card .card-teams { margin-bottom: 7px; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px; }
+.tbc-card .card-teams .tm { font-size: 18px; }
+.tbc-card .card-teams .vs { padding-left: 0; margin: 0; }
+.tbc-card .weekof { font-size: 16px; }
 
 .panel { display: none; }
 .panel.active { display: block; }
 
 footer {
-  margin-top: 30px; padding: 16px; border-top: 1px solid var(--line);
-  color: var(--ink-muted); font-size: 15px; line-height: 1.7;
+  margin-top: 32px; padding: 18px 16px; border-top: 1px solid var(--line);
+  color: var(--ink-muted); font-size: 16px; line-height: 1.7;
 }
 footer strong { color: var(--ink); }
 footer div + div { margin-top: 6px; }
@@ -224,16 +228,14 @@ function renderFixtureCards(container, list) {
       return c ? `<div class="card-star"><b>${c.player_name}</b> · ${name}</div>` : '';
     }).join('');
     html += `<div class="card" data-tracked="${f.tracked.join(',')}">
-      <div class="card-top">
-        <div class="card-time">${fmtTime(d)}${f.approx ? '<span class="approx">約</span>' : ''}</div>
-        <div class="card-matchup">
-          <div class="card-teams">
-            <span class="tm ${homeT?'tracked':''}">${crestTag(f.home)}${f.home}</span>
-            <span class="vs">vs</span>
-            <span class="tm ${awayT?'tracked':''}">${crestTag(f.away)}${f.away}</span>
-          </div>
-          <div class="card-comp">${f.competition}</div>
-        </div>
+      <div class="card-head">
+        <span class="card-time">${fmtTime(d)}${f.approx ? '<span class="approx">約</span>' : ''}</span>
+        <span class="card-comp">${f.competition}</span>
+      </div>
+      <div class="card-teams">
+        <div class="tm ${homeT?'tracked':''}">${crestTag(f.home)}<span>${f.home}</span></div>
+        <div class="vs">vs</div>
+        <div class="tm ${awayT?'tracked':''}">${crestTag(f.away)}<span>${f.away}</span></div>
       </div>
       <div class="card-meta">${badgeHtml(f)}<span class="badge venue">${f.venue}</span></div>
       <div class="card-stars">${stars}</div>
@@ -265,15 +267,13 @@ function renderGenericCards(container, list, withNotes) {
                   (ai ? `<div class="card-star"><b>${ai.player}</b> · ${m.away}</div>` : '');
     const note = withNotes ? (UCL_NOTES[`${m.home}|${m.away}`] || '') : '';
     html += `<div class="card">
-      <div class="card-top">
-        <div class="card-time">${fmtTime(d)}</div>
-        <div class="card-matchup">
-          <div class="card-teams">
-            <span class="tm">${crestTag(m.home)}${m.home}</span>
-            <span class="vs">vs</span>
-            <span class="tm">${crestTag(m.away)}${m.away}</span>
-          </div>
-        </div>
+      <div class="card-head">
+        <span class="card-time">${fmtTime(d)}</span>
+      </div>
+      <div class="card-teams">
+        <div class="tm">${crestTag(m.home)}<span>${m.home}</span></div>
+        <div class="vs">vs</div>
+        <div class="tm">${crestTag(m.away)}<span>${m.away}</span></div>
       </div>
       <div class="card-meta"><span class="badge elta"><span class="bdot"></span>${m.channel}</span></div>
       <div class="card-stars">${stars}</div>
