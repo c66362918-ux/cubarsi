@@ -188,12 +188,14 @@ main { padding: 12px 16px 0; }
 .video-linkout .video-caption { color: #b8b6c8; }
 .match-overview {
   background: #2c2c2e; border-radius: 18px; padding: 18px 22px;
-  margin-top: 12px; color: #c8c8c8; font-size: 16px; line-height: 2;
-  display: flex; gap: 16px;
+  margin-top: 12px; color: #c8c8c8; font-size: 16px;
 }
-.match-overview .mo-col { flex: 1; min-width: 0; }
-.match-overview .mo-col-away { text-align: right; }
+.match-overview .mo-list { display: flex; flex-direction: column; gap: 6px; }
+.match-overview .mo-left { text-align: left; }
+.match-overview .mo-right { text-align: right; }
 .match-overview .og { color: #9a9a9c; }
+.match-overview .mo-divider { border: none; border-top: 1px solid rgba(255,255,255,.15); margin: 14px 0; }
+.match-overview .mo-score { text-align: center; font-weight: 700; color: #fff; }
 
 .tbc-card {
   background: var(--surface); border: 1px dashed var(--line); border-radius: 14px;
@@ -305,35 +307,26 @@ function minuteSortKey(minute) {
   return parseInt(m[0], 10) + (m[1] ? parseInt(m[1], 10) / 100 : 0);
 }
 
-function groupScorers(events) {
-  const groups = [];
-  const byScorer = new Map();
-  events.forEach(e => {
-    if (!byScorer.has(e.scorer)) {
-      const g = { scorer: e.scorer, minutes: [], og: false, firstKey: minuteSortKey(e.minute) };
-      byScorer.set(e.scorer, g);
-      groups.push(g);
-    }
-    const g = byScorer.get(e.scorer);
-    g.minutes.push(e.minute);
-    if (e.og) g.og = true;
-  });
-  groups.sort((a, b) => a.firstKey - b.firstKey);
-  return groups;
-}
-
 function matchOverviewHTML(fixtureId) {
   const events = MATCH_EVENTS[fixtureId];
   if (!events || !events.length) return '';
-  const homeGroups = groupScorers(events.filter(e => e.team === 'home'));
-  const awayGroups = groupScorers(events.filter(e => e.team === 'away'));
-  const colHTML = groups => groups.map(g =>
-    `<div>${g.scorer} ${g.minutes.join(', ')}${g.og ? ' <span class="og">(烏龍球)</span>' : ''}</div>`
-  ).join('');
-  return `<div class="match-overview">
-    <div class="mo-col">${colHTML(homeGroups)}</div>
-    <div class="mo-col mo-col-away">${colHTML(awayGroups)}</div>
-  </div>`;
+  const sorted = [...events].sort((a, b) => minuteSortKey(a.minute) - minuteSortKey(b.minute));
+  const totalByScorer = {};
+  sorted.forEach(e => { totalByScorer[e.scorer] = (totalByScorer[e.scorer] || 0) + 1; });
+  const seenCount = {};
+  const lines = sorted.map(e => {
+    seenCount[e.scorer] = (seenCount[e.scorer] || 0) + 1;
+    const total = totalByScorer[e.scorer];
+    const countTag = total > 1 ? ` (${seenCount[e.scorer]}/${total})` : '';
+    const ogTag = e.og ? ' <span class="og">(烏龍球)</span>' : '';
+    const alignClass = e.team === 'home' ? 'mo-left' : 'mo-right';
+    return `<div class="${alignClass}">${e.scorer} ${e.minute}${countTag}${ogTag}</div>`;
+  }).join('');
+  const homeGoals = events.filter(e => e.team === 'home').length;
+  const awayGoals = events.filter(e => e.team === 'away').length;
+  const fixture = FIXTURES.find(f => f.id === fixtureId);
+  const scoreLine = fixture ? `<div class="mo-score">${fixture.home} ${homeGoals} - ${awayGoals} ${fixture.away}</div>` : '';
+  return `<div class="match-overview"><div class="mo-list">${lines}</div><hr class="mo-divider">${scoreLine}</div>`;
 }
 
 function videoEmbedHTML(v) {
