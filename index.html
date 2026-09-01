@@ -258,7 +258,8 @@ function badgeHtml(f) {
 function starCardHTML(playerName, teamLabel, isCountry) {
   const stat = PLAYER_STATS[playerName];
   const photo = stat && stat.photo ? `<img class="avatar" src="${stat.photo}" alt="" loading="lazy">` : '';
-  const numHTML = stat && stat.number ? `<span class="squad-num">${stat.number}</span>` : '';
+  const primaryNum = isCountry ? (stat && stat.national_number) : (stat && stat.number);
+  const numHTML = primaryNum ? `<span class="squad-num">${primaryNum}</span>` : '';
   const clubAffil = (isCountry && stat && stat.club && stat.club_crest) ?
     `<div class="club-affil"><img src="${stat.club_crest}" alt="" loading="lazy">${stat.club}${stat.number ? ` <span class="squad-num">${stat.number}</span>` : ''}</div>` : '';
   return `<div class="card-star">${photo}<div class="star-text"><div><b>${playerName}</b>${numHTML} · ${teamLabel}</div>${clubAffil}</div></div>`;
