@@ -141,3 +141,12 @@ const COUNTRY_INFO = {"荷蘭": {"crest": "https://upload.wikimedia.org/wikipedi
 const CN_TO_EN_CLUB = {"曼城": "Manchester City", "皇家馬德里": "Real Madrid", "巴塞隆納": "Barcelona", "拿坡里": "Napoli", "兵工廠": "Arsenal", "利物浦": "Liverpool", "巴黎聖日耳曼": "Paris Saint-Germain", "曼聯": "Manchester United", "拜仁慕尼黑": "Bayern Munich"};
 
 const UCL_NOTES = {"布魯日|阿斯頓維拉": "布魯日夏天賣掉愛將佐利斯（轉投兵工廠），阿斯頓維拉則以上季歐霸盃冠軍身分重返歐冠舞台。", "波圖|曼城": "波圖王牌前鋒薩穆傷癒復出的狀態備受關注，球隊將迎戰陣容更豪華的曼城。", "AEK雅典|林茲競技": "台灣轉播所稱「林茲競技」即奧地利班霸LASK，首度闖進歐冠正賽階段，對上上季希臘聯賽冠軍AEK雅典。", "皇家馬德里|國際米蘭": "衛冕義甲冠軍國際米蘭作客伯納烏，挑戰同樣手握多項冠軍的皇家馬德里。", "多特蒙德|比利亞雷爾": "多特蒙德痛失核心布蘭特（轉投阿賈克斯）後由恩梅查扛起更多進攻責任，對上黃色潛水艇比利亞雷爾。", "里爾|皇家貝提斯": "皇家貝提斯確認是這支近年重返歐冠的西甲球隊；里爾老將吉魯坦言本季可能是他球員生涯最後一季。", "巴塞隆納|飛燕諾": "飛燕諾引進前切爾西邊鋒斯特林尋求重生，作客諾坎普挑戰衛冕聯賽冠軍巴塞隆納。", "斯圖加特|斯塔萬格維京": "斯圖加特由新任隊長溫達夫領軍延續近年歐戰佳績，對手斯塔萬格維京是挪威聯賽勁旅首度闖進歐冠正賽。", "利物浦|馬德里競技": "馬德里競技送別隊史射手王格里茲曼後改由阿爾瓦雷斯領銜鋒線，作客安菲爾德接受重建後的首場硬仗考驗。", "巴黎聖日耳曼|斯拉夫人": "台灣轉播所稱「斯拉夫人」即斯洛伐克班霸斯洛伐克布拉提斯拉發，將作客王子公園球場挑戰衛冕歐冠冠軍巴黎聖日耳曼。", "里斯本競技|加拉塔薩雷": "加拉塔薩雷王牌前鋒奧西姆漢近期屢傳轉會兵工廠緋聞，作客里斯本面對鋒線同樣火熱的里斯本競技。", "費內巴切|AS羅馬": "費內巴切結束穆里尼奧時代後大幅改造鋒線，AS羅馬則由加斯佩里尼延續執教，兩隊都急欲證明重建成效。", "曼聯|沙巴": "沙巴是阿塞拜疆球會史上首度晉級歐冠正賽階段，作客老特拉福堪稱本屆最大黑馬故事之一。", "艾因霍溫|頓內茲克礦工": "頓內茨克礦工夏窗簽下前曼城、兵工廠球星津琴科作為陣容門面，作客埃因霍溫迎戰同樣以攻勢足球聞名的PSV。", "拜仁慕尼黑|柏多格林特": "柏多格林特連年稱霸挪超聯賽並屢次在歐戰爆冷，此役作客安聯球場挑戰拜仁慕尼黑。", "科莫|RB萊比錫": "科莫在名帥法布雷加斯率領下首度闖進歐冠，年輕核心尼科·帕斯備受期待；萊比錫則迎回昔日射手王恩昆庫回歸效力。", "布拉格斯拉夫|朗斯": "布拉格斯拉維亞射手霍里延續上季聯賽金靴身手，對上剛獲任隊長、狀態火燙的朗斯隊長陶溫。"};
+
+const VIDEOS = {
+  "mun-ips-0830": {"id": "oKtHiXM1KPA", "channel": "Manchester United 官方頻道", "title": "A Bruno Hat-Trick! | Man Utd 5-2 Ipswich | Highlights"},
+  "bha-che-0830": {"id": "1QvHaCXnIWg", "channel": "Chelsea Football Club 官方頻道", "title": "Chelsea 4-3 Brighton | HIGHLIGHTS | Premier League 2026/27"},
+  "nap-com-0831": {"id": "gCL4nQnqr9Y", "channel": "Serie A 官方頻道", "title": "Entertaining First Half Rewards Como! | NAPOLI-COMO | HIGHLIGHTS"},
+  "mal-rma-0830": {"id": "y-J_ZKFyWX8", "channel": "Real Madrid 官方頻道", "title": "HIGHLIGHTS | Real Madrid 4-0 Malaga CF | LaLiga"},
+  "avl-ars-0901": {"id": "NB1R8bIK5L0", "channel": "Stan Sport Football（轉播方頻道，非官方）", "title": "Aston Villa v Arsenal | Highlights | Premier League 2026/27"},
+  "bar-ray-0831": {"id": "9k1pUqHpGqs", "channel": "DAZN ES（西甲轉播方頻道，非官方）", "title": "FC Barcelona vs Rayo Vallecano (5-2) | Resumen y goles"}
+};
