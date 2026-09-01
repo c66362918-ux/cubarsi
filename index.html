@@ -232,7 +232,7 @@ function fmtDateHeader(d) { return `${d.getMonth()+1}月${d.getDate()}日`; }
 function lookupInfo(name) {
   if (CN_TO_EN_CLUB[name] && CLUBS[CN_TO_EN_CLUB[name]]) {
     const c = CLUBS[CN_TO_EN_CLUB[name]];
-    return { crest: c.crest, player: c.player_name };
+    return { crest: c.crest, player: c.player_name, player2: c.player2_name };
   }
   if (TEAM_INFO[name]) return TEAM_INFO[name];
   if (COUNTRY_INFO[name]) return COUNTRY_INFO[name];
@@ -267,6 +267,32 @@ function starCardHTML(playerName, teamLabel, isCountry) {
   return `<div class="card-star">${photo}<div class="star-text"><div><b>${playerName}</b>${numHTML} · ${teamLabel}</div>${clubAffil}</div></div>`;
 }
 
+function starSideCardHTML(playerName, isCountry, side) {
+  if (!playerName) return '';
+  const stat = PLAYER_STATS[playerName];
+  const photo = stat && stat.photo ? `<img class="avatar" src="${stat.photo}" alt="" loading="lazy">` : '';
+  const primaryNum = isCountry ? (stat && stat.national_number) : (stat && stat.number);
+  const numHTML = primaryNum ? `<span class="squad-num">${primaryNum}</span>` : '';
+  const clubAffil = (isCountry && stat && stat.club && stat.club_crest) ?
+    `<div class="club-affil"><img src="${stat.club_crest}" alt="" loading="lazy">${stat.club}${stat.number ? ` <span class="squad-num">${stat.number}</span>` : ''}</div>` : '';
+  return `<div class="star-side-${side}"><div class="star-line">${photo}<span class="star-name">${playerName}</span>${numHTML}</div>${clubAffil}</div>`;
+}
+
+function genericStarCardHTML(homeName, awayName) {
+  const homeInfo = lookupInfo(homeName);
+  const awayInfo = lookupInfo(awayName);
+  const homeIsCountry = !!COUNTRY_INFO[homeName];
+  const awayIsCountry = !!COUNTRY_INFO[awayName];
+  const rows = [];
+  for (let i = 0; i < 2; i++) {
+    const hName = homeInfo ? (i === 0 ? homeInfo.player : homeInfo.player2) : null;
+    const aName = awayInfo ? (i === 0 ? awayInfo.player : awayInfo.player2) : null;
+    if (!hName && !aName) continue;
+    rows.push(`<div class="star-mirror-row">${starSideCardHTML(hName, homeIsCountry, 'a')}${starSideCardHTML(aName, awayIsCountry, 'b')}</div>`);
+  }
+  return `<div class="star-mirror">${rows.join('')}</div>`;
+}
+
 function renderFixtureCards(container, list) {
   const sorted = [...list].sort((a,b) => new Date(a.kickoff) - new Date(b.kickoff));
   let lastKey = null;
@@ -282,7 +308,10 @@ function renderFixtureCards(container, list) {
     const awayT = f.tracked.includes(f.away);
     const stars = f.tracked.map(name => {
       const c = CLUBS[name];
-      return c ? starCardHTML(c.player_name, name, false) : '';
+      if (!c) return '';
+      const s1 = starCardHTML(c.player_name, name, false);
+      const s2 = c.player2_name ? starCardHTML(c.player2_name, name, false) : '';
+      return s1 + s2;
     }).join('');
     html += `<div class="card" data-tracked="${f.tracked.join(',')}">
       <div class="card-head">
@@ -363,9 +392,7 @@ function renderGenericCards(container, list, withNotes) {
       lastKey = key;
       html += `<div class="date-hd">${fmtDateHeader(d)}<span class="wd">${WD[d.getDay()]}</span></div>`;
     }
-    const hi = lookupInfo(m.home), ai = lookupInfo(m.away);
-    const stars = (hi ? starCardHTML(hi.player, m.home, !!COUNTRY_INFO[m.home]) : '') +
-                  (ai ? starCardHTML(ai.player, m.away, !!COUNTRY_INFO[m.away]) : '');
+    const stars = genericStarCardHTML(m.home, m.away);
     const note = withNotes ? (UCL_NOTES[`${m.home}|${m.away}`] || '') : '';
     const genericVideo = GENERIC_VIDEOS[`${m.home}|${m.away}`];
     html += `<div class="card">
