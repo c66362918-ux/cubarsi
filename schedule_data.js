@@ -155,12 +155,12 @@ const GENERIC_VIDEOS = {};
 
 const COMPETITION_LOGOS = {
   "Premier League": "https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg",
-  "La Liga": "https://upload.wikimedia.org/wikipedia/commons/0/0f/LaLiga_logo_2023.svg",
-  "Serie A": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Serie_A_logo_2022.svg",
-  "Bundesliga": "https://upload.wikimedia.org/wikipedia/commons/1/15/Bundesliga_logo.svg",
-  "Ligue 1": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Ligue1.svg",
+  "La Liga": "https://upload.wikimedia.org/wikipedia/commons/5/54/LaLiga_EA_Sports_2023_Vertical_Logo.svg",
+  "Serie A": "https://upload.wikimedia.org/wikipedia/en/a/ab/Serie_A_ENILIVE_logo.svg",
+  "Bundesliga": "https://upload.wikimedia.org/wikipedia/en/d/df/Bundesliga_logo_%282017%29.svg",
+  "Ligue 1": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Logo_Ligue_1_McDonald%27s_2024.svg",
   "UEFA Champions League": "https://upload.wikimedia.org/wikipedia/en/f/f5/UEFA_Champions_League.svg",
   "Carabao Cup": "https://upload.wikimedia.org/wikipedia/en/0/0c/EFL_%28Carabao%29_Cup_Logo.svg",
-  "DFB-Pokal": "https://upload.wikimedia.org/wikipedia/commons/2/2a/DFB-Pokal_Wordmark.svg",
+  "DFB-Pokal": "https://upload.wikimedia.org/wikipedia/en/7/76/DFB-Pokal_Logo_2026.svg",
   "UEFA Nations League": "https://upload.wikimedia.org/wikipedia/en/8/80/UEFA_Nations_League.svg"
 };
