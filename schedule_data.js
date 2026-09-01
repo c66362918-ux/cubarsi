@@ -156,7 +156,7 @@ const GENERIC_VIDEOS = {};
 const COMPETITION_LOGOS = {
   "Premier League": "https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg",
   "La Liga": "https://upload.wikimedia.org/wikipedia/commons/0/0f/LaLiga_logo_2023.svg",
-  "Serie A": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Serie_A_logo_2022.svg",
+  "Serie A": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Serie_A.svg",
   "Bundesliga": "https://upload.wikimedia.org/wikipedia/en/d/df/Bundesliga_logo_%282017%29.svg",
   "Ligue 1": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Ligue1.svg",
   "UEFA Champions League": "https://upload.wikimedia.org/wikipedia/en/f/f5/UEFA_Champions_League.svg",
