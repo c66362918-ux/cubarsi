@@ -150,3 +150,15 @@ const VIDEOS = {
   "avl-ars-0901": {"id": "NB1R8bIK5L0", "channel": "Stan Sport Football（轉播方頻道，非官方）", "title": "Aston Villa v Arsenal | Highlights | Premier League 2026/27"},
   "bar-ray-0831": {"id": "9k1pUqHpGqs", "channel": "DAZN ES（西甲轉播方頻道，非官方）", "title": "FC Barcelona vs Rayo Vallecano (5-2) | Resumen y goles"}
 };
+
+const COMPETITION_LOGOS = {
+  "Premier League": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Premier_League.svg",
+  "La Liga": "https://upload.wikimedia.org/wikipedia/commons/0/0f/LaLiga_logo_2023.svg",
+  "Serie A": "https://upload.wikimedia.org/wikipedia/commons/e/e9/Serie_A_logo_2022.svg",
+  "Bundesliga": "https://upload.wikimedia.org/wikipedia/commons/1/15/Bundesliga_logo.svg",
+  "Ligue 1": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Ligue1.svg",
+  "UEFA Champions League": "https://upload.wikimedia.org/wikipedia/commons/0/0a/UEFA_Champions_League_logo.svg",
+  "Carabao Cup": "https://upload.wikimedia.org/wikipedia/en/0/0c/EFL_%28Carabao%29_Cup_Logo.svg",
+  "DFB-Pokal": "https://upload.wikimedia.org/wikipedia/commons/2/2a/DFB-Pokal_Wordmark.svg",
+  "UEFA Nations League": "https://upload.wikimedia.org/wikipedia/commons/b/bf/UEFA_Nations_League_Cup.svg"
+};
