@@ -1,0 +1,372 @@
+<title>豪門賽程表・手機版</title>
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root {
+  --bg: #f1f4ec;
+  --surface: #ffffff;
+  --surface-alt: #e8efe0;
+  --ink: #15201a;
+  --ink-muted: #5c6b5c;
+  --line: #d9e0d0;
+  --accent: #b97b1f;
+  --accent-ink: #ffffff;
+  --dazn-bg: #e7edf7; --dazn-ink: #24447a; --dazn-dot: #3865ad;
+  --elta-bg: #faeed9; --elta-ink: #7a4c12; --elta-dot: #c98a2c;
+  --tba-bg: #eef0e8; --tba-ink: #6b7568; --tba-dot: #97a08e;
+  --none-bg: #f1eeea; --none-ink: #8a8175;
+  --shadow: 0 1px 2px rgba(21,32,26,.06), 0 4px 14px rgba(21,32,26,.07);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1712; --surface: #142019; --surface-alt: #1a291f;
+    --ink: #e9efe4; --ink-muted: #94a693; --line: #253526;
+    --accent: #e3a94a; --accent-ink: #241705;
+    --dazn-bg: #16233d; --dazn-ink: #9dc1f4; --dazn-dot: #5f8fd6;
+    --elta-bg: #392a10; --elta-ink: #f0c987; --elta-dot: #e3a94a;
+    --tba-bg: #202b22; --tba-ink: #9fac97; --tba-dot: #5c6b5c;
+    --none-bg: #241f19; --none-ink: #a89c88;
+    --shadow: 0 1px 2px rgba(0,0,0,.35), 0 6px 18px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1712; --surface: #142019; --surface-alt: #1a291f;
+  --ink: #e9efe4; --ink-muted: #94a693; --line: #253526;
+  --accent: #e3a94a; --accent-ink: #241705;
+  --dazn-bg: #16233d; --dazn-ink: #9dc1f4; --dazn-dot: #5f8fd6;
+  --elta-bg: #392a10; --elta-ink: #f0c987; --elta-dot: #e3a94a;
+  --tba-bg: #202b22; --tba-ink: #9fac97; --tba-dot: #5c6b5c;
+  --none-bg: #241f19; --none-ink: #a89c88;
+  --shadow: 0 1px 2px rgba(0,0,0,.35), 0 6px 18px rgba(0,0,0,.35);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Noto Sans TC", "IBM Plex Mono", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 40px;
+}
+
+header.top {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--bg);
+  padding: 14px 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent); font-weight: 600;
+}
+h1 {
+  font-family: "Oswald", "Noto Sans TC", sans-serif;
+  font-weight: 600; font-size: 22px; margin: 2px 0 8px;
+}
+.callout {
+  display: flex; gap: 8px; align-items: flex-start;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 10px 12px; margin-bottom: 10px; font-size: 12.5px; color: var(--ink-muted);
+  line-height: 1.5;
+}
+.callout strong { color: var(--ink); }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: #4a9a5c; flex: none; margin-top: 5px; }
+
+nav.tabs {
+  display: flex; gap: 6px; overflow-x: auto; padding: 4px 0 10px;
+  -ms-overflow-style: none; scrollbar-width: none;
+}
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs button {
+  flex: none; font-family: "Noto Sans TC", sans-serif; font-size: 13px; font-weight: 600;
+  padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--ink-muted);
+  white-space: nowrap;
+}
+nav.tabs button.active { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+
+.clubrow {
+  display: flex; gap: 6px; overflow-x: auto; padding: 0 16px 10px;
+  -ms-overflow-style: none; scrollbar-width: none;
+}
+.clubrow::-webkit-scrollbar { display: none; }
+.clubchip {
+  flex: none; display: flex; align-items: center; gap: 5px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
+  padding: 6px 11px 6px 7px; font-size: 12.5px; font-weight: 500; color: var(--ink);
+}
+.clubchip img { width: 17px; height: 17px; object-fit: contain; }
+.clubchip.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.clubchip.reset { font-family: "IBM Plex Mono", monospace; }
+
+main { padding: 12px 16px 0; }
+
+.date-hd {
+  font-family: "Oswald", sans-serif; font-weight: 600; font-size: 14px;
+  color: var(--ink); background: var(--surface-alt);
+  border-radius: 8px; padding: 7px 12px; margin: 16px 0 8px;
+  display: flex; align-items: baseline; gap: 8px;
+}
+.date-hd:first-child { margin-top: 4px; }
+.date-hd .wd { font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--ink-muted); font-weight: 500; }
+
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+  box-shadow: var(--shadow); padding: 12px 14px; margin-bottom: 10px;
+}
+.card.hidden { display: none; }
+.card-top { display: flex; align-items: center; gap: 10px; }
+.card-time {
+  font-family: "IBM Plex Mono", monospace; font-weight: 700; font-size: 17px;
+  font-variant-numeric: tabular-nums; flex: none; min-width: 48px;
+}
+.card-time .approx { display: block; font-size: 9px; color: var(--accent); font-weight: 600; }
+.card-matchup { flex: 1; min-width: 0; }
+.card-teams { display: flex; align-items: center; gap: 6px; font-size: 14.5px; font-weight: 500; flex-wrap: wrap; }
+.card-teams img { width: 20px; height: 20px; object-fit: contain; flex: none; }
+.card-teams .tm { display: flex; align-items: center; gap: 5px; }
+.card-teams .tm.tracked { font-weight: 700; }
+.card-teams .vs { color: var(--ink-muted); font-family: "IBM Plex Mono", monospace; font-size: 11px; }
+.card-comp { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; color: var(--ink-muted); margin-top: 2px; }
+
+.card-meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 10px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 5px; border-radius: 999px;
+  padding: 4px 9px; font-size: 11.5px; font-weight: 600; white-space: nowrap;
+}
+.badge .bdot { width: 5px; height: 5px; border-radius: 50%; }
+.badge.dazn { background: var(--dazn-bg); color: var(--dazn-ink); }
+.badge.dazn .bdot { background: var(--dazn-dot); }
+.badge.elta { background: var(--elta-bg); color: var(--elta-ink); }
+.badge.elta .bdot { background: var(--elta-dot); }
+.badge.tba { background: var(--tba-bg); color: var(--tba-ink); font-weight: 500; }
+.badge.tba .bdot { background: var(--tba-dot); }
+.badge.none { background: var(--none-bg); color: var(--none-ink); font-weight: 500; }
+.badge.venue { background: none; border: 1px solid var(--line); color: var(--ink-muted); font-weight: 500; }
+
+.card-stars { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+.card-star { font-size: 12px; color: var(--ink-muted); }
+.card-star b { color: var(--ink); font-weight: 600; }
+
+.card-note { margin-top: 8px; font-size: 12.5px; color: var(--ink-muted); line-height: 1.6; border-top: 1px dashed var(--line); padding-top: 8px; }
+
+.tbc-card {
+  background: var(--surface); border: 1px dashed var(--line); border-radius: 12px;
+  padding: 11px 13px; margin-bottom: 8px; font-size: 13px; color: var(--ink-muted);
+}
+.tbc-card .card-teams { margin-bottom: 4px; }
+.tbc-card .weekof { font-size: 11.5px; }
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+footer {
+  margin-top: 28px; padding: 16px; border-top: 1px solid var(--line);
+  color: var(--ink-muted); font-size: 11.5px; line-height: 1.7;
+}
+footer strong { color: var(--ink); }
+footer div + div { margin-top: 6px; }
+
+</style>
+
+<div id="app"></div>
+<script src="schedule_data.js"></script>
+<script>
+const WD = ["週日","週一","週二","週三","週四","週五","週六"];
+let activeClub = null;
+
+function fmtTime(d) { return d.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false }); }
+function dateKey(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+function fmtDateHeader(d) { return `${d.getMonth()+1}月${d.getDate()}日`; }
+
+function lookupInfo(name) {
+  if (CN_TO_EN_CLUB[name] && CLUBS[CN_TO_EN_CLUB[name]]) {
+    const c = CLUBS[CN_TO_EN_CLUB[name]];
+    return { crest: c.crest, player: c.player_name };
+  }
+  if (TEAM_INFO[name]) return TEAM_INFO[name];
+  if (COUNTRY_INFO[name]) return COUNTRY_INFO[name];
+  return null;
+}
+function crestTag(name) {
+  const info = CLUBS[name] ? { crest: CLUBS[name].crest } : lookupInfo(name);
+  return info ? `<img src="${info.crest}" alt="" loading="lazy">` : '';
+}
+function badgeHtml(f) {
+  const b = f.display || f.broadcaster;
+  let cls = 'elta';
+  if (b.startsWith('DAZN')) cls = 'dazn';
+  else if (b.includes('待公布')) cls = 'tba';
+  else if (b.includes('無確認')) cls = 'none';
+  return `<span class="badge ${cls}"><span class="bdot"></span>${b}</span>`;
+}
+
+function renderFixtureCards(container, list) {
+  const sorted = [...list].sort((a,b) => new Date(a.kickoff) - new Date(b.kickoff));
+  let lastKey = null;
+  let html = '';
+  sorted.forEach(f => {
+    const d = new Date(f.kickoff);
+    const key = dateKey(d);
+    if (key !== lastKey) {
+      lastKey = key;
+      html += `<div class="date-hd" data-key="${key}">${fmtDateHeader(d)}<span class="wd">${WD[d.getDay()]}</span></div>`;
+    }
+    const homeT = f.tracked.includes(f.home);
+    const awayT = f.tracked.includes(f.away);
+    const stars = f.tracked.map(name => {
+      const c = CLUBS[name];
+      return c ? `<div class="card-star"><b>${c.player_name}</b> · ${name}</div>` : '';
+    }).join('');
+    html += `<div class="card" data-tracked="${f.tracked.join(',')}">
+      <div class="card-top">
+        <div class="card-time">${fmtTime(d)}${f.approx ? '<span class="approx">約</span>' : ''}</div>
+        <div class="card-matchup">
+          <div class="card-teams">
+            <span class="tm ${homeT?'tracked':''}">${crestTag(f.home)}${f.home}</span>
+            <span class="vs">vs</span>
+            <span class="tm ${awayT?'tracked':''}">${crestTag(f.away)}${f.away}</span>
+          </div>
+          <div class="card-comp">${f.competition}</div>
+        </div>
+      </div>
+      <div class="card-meta">${badgeHtml(f)}<span class="badge venue">${f.venue}</span></div>
+      <div class="card-stars">${stars}</div>
+    </div>`;
+  });
+  container.innerHTML = html;
+}
+
+function renderTBC(container) {
+  container.innerHTML = TBC.map(f => `<div class="tbc-card" data-tracked="${f.tracked.join(',')}">
+    <div class="card-teams">${crestTag(f.home)}${f.home}<span class="vs">vs</span>${crestTag(f.away)}${f.away}</div>
+    <div class="weekof">${f.competition} · ${f.weekOf} · ${badgeHtml(f)}</div>
+  </div>`).join('');
+}
+
+function renderGenericCards(container, list, withNotes) {
+  const sorted = [...list].sort((a,b) => new Date(a.kickoff) - new Date(b.kickoff));
+  let lastKey = null;
+  let html = '';
+  sorted.forEach(m => {
+    const d = new Date(m.kickoff);
+    const key = dateKey(d);
+    if (key !== lastKey) {
+      lastKey = key;
+      html += `<div class="date-hd">${fmtDateHeader(d)}<span class="wd">${WD[d.getDay()]}</span></div>`;
+    }
+    const hi = lookupInfo(m.home), ai = lookupInfo(m.away);
+    const stars = (hi ? `<div class="card-star"><b>${hi.player}</b> · ${m.home}</div>` : '') +
+                  (ai ? `<div class="card-star"><b>${ai.player}</b> · ${m.away}</div>` : '');
+    const note = withNotes ? (UCL_NOTES[`${m.home}|${m.away}`] || '') : '';
+    html += `<div class="card">
+      <div class="card-top">
+        <div class="card-time">${fmtTime(d)}</div>
+        <div class="card-matchup">
+          <div class="card-teams">
+            <span class="tm">${crestTag(m.home)}${m.home}</span>
+            <span class="vs">vs</span>
+            <span class="tm">${crestTag(m.away)}${m.away}</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-meta"><span class="badge elta"><span class="bdot"></span>${m.channel}</span></div>
+      <div class="card-stars">${stars}</div>
+      ${note ? `<div class="card-note">${note}</div>` : ''}
+    </div>`;
+  });
+  container.innerHTML = html;
+}
+
+function setClubFilter(club) {
+  activeClub = club;
+  document.querySelectorAll('.clubchip').forEach(c => {
+    c.classList.toggle('active', (club === null && c.classList.contains('reset')) || c.dataset.club === club);
+  });
+  document.querySelectorAll('#panel-tracked .card').forEach(card => {
+    const show = !club || card.dataset.tracked.split(',').includes(club);
+    card.classList.toggle('hidden', !show);
+  });
+  document.querySelectorAll('#panel-tracked .date-hd').forEach(hd => {
+    const anyVisible = document.querySelector(`#panel-tracked .card[data-key-group="${hd.dataset.key}"]:not(.hidden)`);
+    // fall back: check next siblings until next date-hd
+    let el = hd.nextElementSibling, any = false;
+    while (el && !el.classList.contains('date-hd')) {
+      if (el.classList.contains('card') && !el.classList.contains('hidden')) any = true;
+      el = el.nextElementSibling;
+    }
+    hd.style.display = any ? '' : 'none';
+  });
+  document.querySelectorAll('#panel-tbc .tbc-card').forEach(card => {
+    const show = !club || card.dataset.tracked.split(',').includes(club);
+    card.style.display = show ? '' : 'none';
+  });
+}
+
+function switchTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === id));
+  document.querySelectorAll('nav.tabs button').forEach(b => b.classList.toggle('active', b.dataset.tab === id));
+  document.getElementById('clubrow').style.display = (id === 'panel-tracked' || id === 'panel-tbc') ? 'flex' : 'none';
+  window.scrollTo({top: 0, behavior: 'instant'});
+}
+
+function build() {
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <header class="top">
+      <div class="eyebrow">歐洲十一豪門 · 台灣時間賽程 · 手機版</div>
+      <h1>豪門賽程表</h1>
+      <div class="callout"><span class="dot"></span><span><strong>Discord 自動提醒已啟用</strong> — 追蹤球隊的比賽開賽前約1小時會自動發送通知。</span></div>
+      <nav class="tabs">
+        <button data-tab="panel-tracked" class="active">追蹤球隊 ${FIXTURES.length}</button>
+        <button data-tab="panel-tbc">時間未定 ${TBC.length}</button>
+        <button data-tab="panel-ucl">歐冠 ${UCL_ALL.length}</button>
+        <button data-tab="panel-unl">歐國聯 ${UNL_ALL.length}</button>
+      </nav>
+    </header>
+    <div class="clubrow" id="clubrow"></div>
+    <main>
+      <div class="panel active" id="panel-tracked"></div>
+      <div class="panel" id="panel-tbc"></div>
+      <div class="panel" id="panel-ucl"></div>
+      <div class="panel" id="panel-unl"></div>
+      <footer>
+        <div><strong>轉播說明：</strong>巴塞隆納、皇家馬德里的西甲賽事由 <strong>DAZN2（74台）</strong>轉播；兩隊的歐冠賽事及其餘9隊所有賽事由<strong>愛爾達 ELTA</strong>轉播（已標示實際頻道）。</div>
+        <div><strong>無轉播確認：</strong>英格蘭聯賽盃、德國盃不在愛爾達轉播項目中，目前查無台灣轉播。</div>
+        <div>9/21–9/24 國際賽週期五大聯賽暫無賽事；9/25起為歐國聯比賽週（見上方分頁）。</div>
+        <div>資料整理：2026-08-31</div>
+      </footer>
+    </main>
+  `;
+
+  renderFixtureCards(document.getElementById('panel-tracked'), FIXTURES);
+  renderTBC(document.getElementById('panel-tbc'));
+  renderGenericCards(document.getElementById('panel-ucl'), UCL_ALL, true);
+  renderGenericCards(document.getElementById('panel-unl'), UNL_ALL, false);
+
+  const clubrow = document.getElementById('clubrow');
+  const reset = document.createElement('div');
+  reset.className = 'clubchip reset active';
+  reset.textContent = '全部';
+  reset.onclick = () => setClubFilter(null);
+  clubrow.appendChild(reset);
+  Object.keys(CLUBS).forEach(name => {
+    const chip = document.createElement('div');
+    chip.className = 'clubchip';
+    chip.dataset.club = name;
+    chip.innerHTML = `<img src="${CLUBS[name].crest}" alt="">${name}`;
+    chip.onclick = () => setClubFilter(name);
+    clubrow.appendChild(chip);
+  });
+
+  document.querySelectorAll('nav.tabs button').forEach(b => {
+    b.addEventListener('click', () => switchTab(b.dataset.tab));
+  });
+}
+
+build();
+</script>
