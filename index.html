@@ -226,6 +226,8 @@ footer {
 footer strong { color: var(--ink); }
 footer div + div { margin-top: 6px; }
 
+img[src*="Tottenham_Hotspur.svg"] { background: #fff; border-radius: 50%; padding: 3px; }
+
 </style>
 
 <div id="app"></div>
@@ -495,7 +497,7 @@ function build() {
     const chip = document.createElement('div');
     chip.className = 'clubchip';
     chip.dataset.club = name;
-    chip.innerHTML = `<img src="${CLUBS[name].crest}" alt="">${name}`;
+    chip.innerHTML = `<img src="${CLUBS[name].crest}" alt="">${zhName(name)}`;
     chip.onclick = () => setClubFilter(name);
     clubrow.appendChild(chip);
   });
