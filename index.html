@@ -159,8 +159,9 @@ main { padding: 12px 16px 0; }
 .card-stars { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
 
 .star-mirror { display: flex; flex-direction: column; gap: 12px; }
-.star-mirror-row { display: flex; align-items: flex-start; justify-content: center; gap: 16px; }
-.star-mirror-row .star-side-a, .star-mirror-row .star-side-b { flex: 0 1 auto; min-width: 0; max-width: 46%; }
+.star-mirror-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; position: relative; }
+.star-mirror-row::after { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--line); transform: translateX(-50%); }
+.star-mirror-row .star-side-a, .star-mirror-row .star-side-b { flex: 1; min-width: 0; }
 .star-mirror-row .star-side-b { text-align: right; }
 .star-mirror-row .star-line { display: flex; align-items: center; gap: 6px; }
 .star-mirror-row .star-side-b .star-line { flex-direction: row-reverse; }
