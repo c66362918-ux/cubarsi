@@ -321,6 +321,7 @@ function renderFixtureCards(container, list) {
     const homeT = f.tracked.includes(f.home);
     const awayT = f.tracked.includes(f.away);
     const stars = genericStarCardHTML(f.home, f.away);
+    const note = FIXTURES_NOTES[f.id] || UCL_NOTES[`${zhName(f.home)}|${zhName(f.away)}`] || '';
     html += `<div class="card" data-tracked="${f.tracked.join(',')}">
       <div class="card-head">
         <span class="card-time">${fmtTime(d)}${f.approx ? '<span class="approx">約</span>' : ''}</span>
@@ -333,6 +334,7 @@ function renderFixtureCards(container, list) {
       </div>
       <div class="card-meta">${badgeHtml(f)}<span class="badge venue">${f.venue}</span></div>
       <div class="card-stars">${stars}</div>
+      ${note ? `<div class="card-note">${note}</div>` : ''}
       ${(d < new Date() && VIDEOS[f.id]) ? videoEmbedHTML(VIDEOS[f.id]) + matchOverviewHTML(f.id) : ''}
     </div>`;
   });
@@ -389,7 +391,7 @@ function renderTBC(container) {
   </div>`).join('');
 }
 
-function renderGenericCards(container, list, withNotes) {
+function renderGenericCards(container, list, notesDict) {
   const sorted = [...list].sort((a,b) => new Date(a.kickoff) - new Date(b.kickoff));
   let lastKey = null;
   let html = '';
@@ -401,7 +403,7 @@ function renderGenericCards(container, list, withNotes) {
       html += `<div class="date-hd">${fmtDateHeader(d)}<span class="wd">${WD[d.getDay()]}</span></div>`;
     }
     const stars = genericStarCardHTML(m.home, m.away);
-    const note = withNotes ? (UCL_NOTES[`${m.home}|${m.away}`] || '') : '';
+    const note = notesDict ? (notesDict[`${m.home}|${m.away}`] || '') : '';
     const genericVideo = GENERIC_VIDEOS[`${m.home}|${m.away}`];
     html += `<div class="card">
       <div class="card-head">
@@ -484,8 +486,8 @@ function build() {
 
   renderFixtureCards(document.getElementById('panel-tracked'), FIXTURES);
   renderTBC(document.getElementById('panel-tbc'));
-  renderGenericCards(document.getElementById('panel-ucl'), UCL_ALL, true);
-  renderGenericCards(document.getElementById('panel-unl'), UNL_ALL, false);
+  renderGenericCards(document.getElementById('panel-ucl'), UCL_ALL, UCL_NOTES);
+  renderGenericCards(document.getElementById('panel-unl'), UNL_ALL, UNL_NOTES);
 
   const clubrow = document.getElementById('clubrow');
   const reset = document.createElement('div');
