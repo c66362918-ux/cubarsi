@@ -160,12 +160,12 @@ main { padding: 12px 16px 0; }
 .card-stars { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
 
 .star-mirror { display: flex; flex-direction: column; gap: 12px; }
-.star-mirror-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; position: relative; }
+.star-mirror-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto; grid-auto-flow: column; align-items: start; gap: 3px 16px; position: relative; }
 .star-mirror-row::after { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--line); transform: translateX(-50%); }
-.star-mirror-row .star-side-a, .star-mirror-row .star-side-b { flex: 1; min-width: 0; }
+.star-mirror-row .star-side-a, .star-mirror-row .star-side-b { display: contents; }
 .star-mirror-row .star-side-b { text-align: right; }
-.star-mirror-row .star-line { display: grid; grid-template-columns: 80px 1fr 50px; align-items: start; gap: 6px; }
-.star-mirror-row .star-side-b .star-line { grid-template-columns: 50px 1fr 80px; }
+.star-mirror-row .star-line { display: grid; grid-template-columns: 80px minmax(0, 1fr) 50px; align-items: start; gap: 6px; }
+.star-mirror-row .star-side-b .star-line { grid-template-columns: 50px minmax(0, 1fr) 80px; }
 .star-mirror-row .star-side-a .star-line .squad-num { justify-self: start; }
 .star-mirror-row .star-side-b .star-line .squad-num { justify-self: end; }
 .star-mirror-row .star-side-b .star-line img.avatar { order: 3; }
@@ -175,8 +175,8 @@ main { padding: 12px 16px 0; }
 a.star-name:hover, a.star-name:active { text-decoration: underline; }
 .star-mirror-row img.avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; object-position: center top; border: 1.5px solid var(--line); }
 .star-mirror-row .squad-num { display: inline-block; padding: 1px 7px; font-weight: 800; font-size: 30px; color: #fff; background: var(--accent); border-radius: 5px; }
-.star-mirror-row .club-affil { display: grid; grid-template-columns: 36px 1fr 34px; align-items: start; gap: 5px; font-size: 30px; color: var(--ink-muted); opacity: 0.85; margin-top: 3px; }
-.star-mirror-row .star-side-b .club-affil { grid-template-columns: 34px 1fr 36px; }
+.star-mirror-row .club-affil { display: grid; grid-template-columns: 36px minmax(0, 1fr) 34px; align-items: start; gap: 5px; font-size: 30px; color: var(--ink-muted); opacity: 0.85; }
+.star-mirror-row .star-side-b .club-affil { grid-template-columns: 34px minmax(0, 1fr) 36px; }
 .star-mirror-row .star-side-a .club-affil .squad-num { justify-self: start; }
 .star-mirror-row .star-side-b .club-affil .squad-num { justify-self: end; }
 .star-mirror-row .club-affil img { width: 36px; height: 36px; object-fit: contain; }
