@@ -160,25 +160,24 @@ main { padding: 12px 16px 0; }
 .card-stars { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
 
 .star-mirror { display: flex; flex-direction: column; gap: 12px; }
-.star-mirror-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto; grid-auto-flow: column; align-items: start; gap: 3px 16px; position: relative; }
+.star-mirror-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 3px 16px; position: relative; }
 .star-mirror-row::after { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--line); transform: translateX(-50%); }
-.star-mirror-row .star-side-a, .star-mirror-row .star-side-b { display: contents; }
 .star-mirror-row .star-side-b { text-align: right; }
 .star-mirror-row .star-line { display: grid; grid-template-columns: 80px minmax(0, 1fr) 50px; align-items: start; gap: 6px; }
-.star-mirror-row .star-side-b .star-line { grid-template-columns: 50px minmax(0, 1fr) 80px; }
-.star-mirror-row .star-side-a .star-line .squad-num { justify-self: start; }
-.star-mirror-row .star-side-b .star-line .squad-num { justify-self: end; }
-.star-mirror-row .star-side-b .star-line img.avatar { order: 3; }
-.star-mirror-row .star-side-b .star-line .star-name { order: 2; }
-.star-mirror-row .star-side-b .star-line .squad-num { order: 1; }
+.star-mirror-row .star-line.star-side-b { grid-template-columns: 50px minmax(0, 1fr) 80px; }
+.star-mirror-row .star-line.star-side-a .squad-num { justify-self: start; }
+.star-mirror-row .star-line.star-side-b .squad-num { justify-self: end; }
+.star-mirror-row .star-line.star-side-b img.avatar { order: 3; }
+.star-mirror-row .star-line.star-side-b .star-name { order: 2; }
+.star-mirror-row .star-line.star-side-b .squad-num { order: 1; }
 .star-mirror-row .star-name { font-size: 36px; color: var(--ink-muted); line-height: 1.25; text-decoration: none; min-width: 0; }
 a.star-name:hover, a.star-name:active { text-decoration: underline; }
 .star-mirror-row img.avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; object-position: center top; border: 1.5px solid var(--line); }
 .star-mirror-row .squad-num { display: inline-block; padding: 1px 7px; font-weight: 800; font-size: 30px; color: #fff; background: var(--accent); border-radius: 5px; }
-.star-mirror-row .club-affil { display: grid; grid-template-columns: 36px minmax(0, 1fr) 34px; align-items: start; gap: 5px; font-size: 30px; color: var(--ink-muted); opacity: 0.85; }
-.star-mirror-row .star-side-b .club-affil { grid-template-columns: 34px minmax(0, 1fr) 36px; }
-.star-mirror-row .star-side-a .club-affil .squad-num { justify-self: start; }
-.star-mirror-row .star-side-b .club-affil .squad-num { justify-self: end; }
+.star-mirror-row .club-affil { display: grid; grid-template-columns: 36px minmax(0, 1fr) 50px; align-items: start; gap: 6px; font-size: 30px; color: var(--ink-muted); opacity: 0.85; }
+.star-mirror-row .club-affil.star-side-b { grid-template-columns: 50px minmax(0, 1fr) 36px; }
+.star-mirror-row .club-affil.star-side-a .squad-num { justify-self: start; }
+.star-mirror-row .club-affil.star-side-b .squad-num { justify-self: end; }
 .star-mirror-row .club-affil img { width: 36px; height: 36px; object-fit: contain; }
 .star-mirror-row .club-affil .squad-num { font-weight: 800; color: var(--accent); background: none; padding: 0; font-size: 26px; }
 
@@ -282,7 +281,7 @@ function badgeHtml(f) {
 }
 
 function starSideCardHTML(playerName, isCountry, side) {
-  if (!playerName) return '';
+  if (!playerName) return { line: '', affil: '' };
   const stat = PLAYER_STATS[playerName];
   const photo = stat && stat.photo ? `<img class="avatar" src="${stat.photo}" alt="" loading="lazy">` : '';
   const primaryNum = isCountry ? (stat && stat.national_number) : (stat && stat.number);
@@ -291,12 +290,13 @@ function starSideCardHTML(playerName, isCountry, side) {
   const clubCrestHTML = stat && stat.club_crest ? `<img src="${stat.club_crest}" alt="" loading="lazy">` : '';
   const clubAffil = (isCountry && stat && stat.club && stat.club_crest) ?
     (side === 'b' ?
-      `<div class="club-affil">${clubNumHTML}${stat.club}${clubCrestHTML}</div>` :
-      `<div class="club-affil">${clubCrestHTML}${stat.club}${clubNumHTML}</div>`) : '';
+      `<div class="club-affil star-side-${side}">${clubNumHTML}${stat.club}${clubCrestHTML}</div>` :
+      `<div class="club-affil star-side-${side}">${clubCrestHTML}${stat.club}${clubNumHTML}</div>`) : '';
   const nameHTML = stat && stat.wiki_url ?
     `<a class="star-name" href="${stat.wiki_url}" target="_blank" rel="noopener">${playerName}</a>` :
     `<span class="star-name">${playerName}</span>`;
-  return `<div class="star-side-${side}"><div class="star-line">${photo}${nameHTML}${numHTML}</div>${clubAffil}</div>`;
+  const line = `<div class="star-line star-side-${side}">${photo}${nameHTML}${numHTML}</div>`;
+  return { line, affil: clubAffil };
 }
 
 function genericStarCardHTML(homeName, awayName) {
@@ -309,7 +309,9 @@ function genericStarCardHTML(homeName, awayName) {
     const hName = homeInfo ? (i === 0 ? homeInfo.player : homeInfo.player2) : null;
     const aName = awayInfo ? (i === 0 ? awayInfo.player : awayInfo.player2) : null;
     if (!hName && !aName) continue;
-    rows.push(`<div class="star-mirror-row">${starSideCardHTML(hName, homeIsCountry, 'a')}${starSideCardHTML(aName, awayIsCountry, 'b')}</div>`);
+    const h = starSideCardHTML(hName, homeIsCountry, 'a');
+    const a = starSideCardHTML(aName, awayIsCountry, 'b');
+    rows.push(`<div class="star-mirror-row">${h.line}${a.line}${h.affil}${a.affil}</div>`);
   }
   return `<div class="star-mirror">${rows.join('')}</div>`;
 }
