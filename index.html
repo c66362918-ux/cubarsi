@@ -325,9 +325,9 @@ function renderFixtureCards(container, list) {
         ${compTagHTML(f.competition)}
       </div>
       <div class="card-teams">
-        <div class="tm ${homeT?'tracked':''}">${crestTag(f.home)}<span>${f.home}</span></div>
+        <div class="tm ${homeT?'tracked':''}">${crestTag(f.home)}<span>${zhName(f.home)}</span></div>
         <div class="vs">vs</div>
-        <div class="tm ${awayT?'tracked':''}">${crestTag(f.away)}<span>${f.away}</span></div>
+        <div class="tm ${awayT?'tracked':''}">${crestTag(f.away)}<span>${zhName(f.away)}</span></div>
       </div>
       <div class="card-meta">${badgeHtml(f)}<span class="badge venue">${f.venue}</span></div>
       <div class="card-stars">${stars}</div>
@@ -382,7 +382,7 @@ function videoEmbedHTML(v) {
 
 function renderTBC(container) {
   container.innerHTML = TBC.map(f => `<div class="tbc-card" data-tracked="${f.tracked.join(',')}">
-    <div class="card-teams">${crestTag(f.home)}${f.home}<span class="vs">vs</span>${crestTag(f.away)}${f.away}</div>
+    <div class="card-teams">${crestTag(f.home)}${zhName(f.home)}<span class="vs">vs</span>${crestTag(f.away)}${zhName(f.away)}</div>
     <div class="weekof">${f.competition} · ${f.weekOf} · ${badgeHtml(f)}</div>
   </div>`).join('');
 }
@@ -406,9 +406,9 @@ function renderGenericCards(container, list, withNotes) {
         <span class="card-time">${fmtTime(d)}</span>
       </div>
       <div class="card-teams">
-        <div class="tm">${crestTag(m.home)}<span>${m.home}</span></div>
+        <div class="tm">${crestTag(m.home)}<span>${zhName(m.home)}</span></div>
         <div class="vs">vs</div>
-        <div class="tm">${crestTag(m.away)}<span>${m.away}</span></div>
+        <div class="tm">${crestTag(m.away)}<span>${zhName(m.away)}</span></div>
       </div>
       <div class="card-meta"><span class="badge elta"><span class="bdot"></span>${m.channel}</span></div>
       <div class="card-stars">${stars}</div>
