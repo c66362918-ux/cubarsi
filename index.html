@@ -164,7 +164,8 @@ main { padding: 12px 16px 0; }
 .star-mirror-row .star-side-b { text-align: right; }
 .star-mirror-row .star-line { display: flex; align-items: center; gap: 6px; }
 .star-mirror-row .star-side-b .star-line { flex-direction: row-reverse; }
-.star-mirror-row .star-name { font-size: 18px; color: var(--ink-muted); line-height: 1.25; }
+.star-mirror-row .star-name { font-size: 18px; color: var(--ink-muted); line-height: 1.25; text-decoration: none; }
+a.star-name:hover, a.star-name:active { text-decoration: underline; }
 .star-mirror-row img.avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; object-position: center top; border: 1.5px solid var(--line); flex: none; }
 .star-mirror-row .squad-num { display: inline-block; padding: 1px 7px; font-weight: 800; font-size: 15px; color: #fff; background: var(--accent); border-radius: 5px; flex: none; }
 .star-mirror-row .club-affil { display: flex; align-items: center; gap: 5px; font-size: 15px; color: var(--ink-muted); opacity: 0.85; margin-top: 3px; }
@@ -281,7 +282,10 @@ function starSideCardHTML(playerName, isCountry, side) {
     (side === 'b' ?
       `<div class="club-affil">${clubNumHTML}${stat.club}${clubCrestHTML}</div>` :
       `<div class="club-affil">${clubCrestHTML}${stat.club}${clubNumHTML}</div>`) : '';
-  return `<div class="star-side-${side}"><div class="star-line">${photo}<span class="star-name">${playerName}</span>${numHTML}</div>${clubAffil}</div>`;
+  const nameHTML = stat && stat.wiki_url ?
+    `<a class="star-name" href="${stat.wiki_url}" target="_blank" rel="noopener">${playerName}</a>` :
+    `<span class="star-name">${playerName}</span>`;
+  return `<div class="star-side-${side}"><div class="star-line">${photo}${nameHTML}${numHTML}</div>${clubAffil}</div>`;
 }
 
 function genericStarCardHTML(homeName, awayName) {
