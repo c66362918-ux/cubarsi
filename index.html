@@ -344,7 +344,8 @@ function renderFixtureCards(container, list) {
       <div class="card-meta">${badgeHtml(f)}<span class="badge venue">${f.venue}</span></div>
       <div class="card-stars">${stars}</div>
       ${note ? `<div class="card-note">${note}</div>` : ''}
-      ${(d < new Date() && VIDEOS[f.id]) ? videoEmbedHTML(VIDEOS[f.id]) + matchOverviewHTML(f.id) : ''}
+      ${(d < new Date() && VIDEOS[f.id]) ? videoEmbedHTML(VIDEOS[f.id]) : ''}
+      ${(d < new Date() && MATCH_EVENTS[f.id]) ? matchOverviewHTML(f.id) : ''}
     </div>`;
   });
   container.innerHTML = html;
