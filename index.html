@@ -48,7 +48,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: "Noto Sans TC", "IBM Plex Mono", sans-serif;
-  font-size: 42px;
+  font-size: 29.4px;
   -webkit-font-smoothing: antialiased;
   padding-bottom: 40px;
 }
@@ -61,17 +61,17 @@ header.top {
 }
 .eyebrow {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 32px; letter-spacing: .05em; text-transform: uppercase;
+  font-size: 22.4px; letter-spacing: .05em; text-transform: uppercase;
   color: var(--accent); font-weight: 600;
 }
 h1 {
   font-family: "Oswald", "Noto Sans TC", sans-serif;
-  font-weight: 600; font-size: 96px; margin: 6px 0 15px;
+  font-weight: 600; font-size: 67.2px; margin: 6px 0 15px;
 }
 .callout {
   display: flex; gap: 11px; align-items: flex-start;
   background: var(--surface); border: 1px solid var(--line); border-radius: 15px;
-  padding: 16px 18px; margin-bottom: 15px; font-size: 42px; color: var(--ink-muted);
+  padding: 16px 18px; margin-bottom: 15px; font-size: 29.4px; color: var(--ink-muted);
   line-height: 1.5;
 }
 .callout strong { color: var(--ink); }
@@ -84,7 +84,7 @@ nav.tabs {
 nav.tabs::-webkit-scrollbar { display: none; }
 nav.tabs button {
   flex: none; display: inline-flex; align-items: center; gap: 8px;
-  font-family: "Noto Sans TC", sans-serif; font-size: 44px; font-weight: 600;
+  font-family: "Noto Sans TC", sans-serif; font-size: 30.8px; font-weight: 600;
   padding: 10px 22px; border-radius: 999px; border: 1px solid var(--line);
   background: var(--surface); color: var(--ink-muted);
   white-space: nowrap;
@@ -100,7 +100,7 @@ nav.tabs button.active { background: var(--accent); color: var(--accent-ink); bo
 .clubchip {
   flex: none; display: flex; align-items: center; gap: 9px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
-  padding: 11px 20px 11px 13px; font-size: 42px; font-weight: 500; color: var(--ink);
+  padding: 11px 20px 11px 13px; font-size: 29.4px; font-weight: 500; color: var(--ink);
 }
 .clubchip img { width: 64px; height: 64px; object-fit: contain; }
 .clubchip.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
@@ -109,13 +109,13 @@ nav.tabs button.active { background: var(--accent); color: var(--accent-ink); bo
 main { padding: 12px 16px 0; }
 
 .date-hd {
-  font-family: "Oswald", sans-serif; font-weight: 600; font-size: 56px;
+  font-family: "Oswald", sans-serif; font-weight: 600; font-size: 39.2px;
   color: var(--ink); background: var(--surface-alt);
   border-radius: 10px; padding: 13px 18px; margin: 24px 0 14px;
   display: flex; align-items: baseline; gap: 12px;
 }
 .date-hd:first-child { margin-top: 4px; }
-.date-hd .wd { font-family: "IBM Plex Mono", monospace; font-size: 40px; color: var(--ink-muted); font-weight: 500; }
+.date-hd .wd { font-family: "IBM Plex Mono", monospace; font-size: 28px; color: var(--ink-muted); font-weight: 500; }
 
 .card {
   background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
@@ -127,25 +127,25 @@ main { padding: 12px 16px 0; }
   margin-bottom: 12px;
 }
 .card-time {
-  font-family: "IBM Plex Mono", monospace; font-weight: 700; font-size: 54px;
+  font-family: "IBM Plex Mono", monospace; font-weight: 700; font-size: 37.8px;
   font-variant-numeric: tabular-nums; color: var(--accent); flex: none;
 }
-.card-time .approx { font-size: 28px; color: var(--accent); font-weight: 600; margin-left: 4px; }
-.card-comp { display: inline-flex; align-items: center; gap: 8px; font-family: "IBM Plex Mono", monospace; font-size: 30px; color: var(--ink-muted); text-align: right; }
+.card-time .approx { font-size: 19.6px; color: var(--accent); font-weight: 600; margin-left: 4px; }
+.card-comp { display: inline-flex; align-items: center; gap: 8px; font-family: "IBM Plex Mono", monospace; font-size: 21px; color: var(--ink-muted); text-align: right; }
 .card-comp img { width: 84px; height: 84px; object-fit: contain; background: #fff; border-radius: 8px; padding: 3px; }
 .card-teams { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.card-teams .tm { display: flex; align-items: center; gap: 13px; font-size: 58px; font-weight: 600; line-height: 1.25; flex: 1; min-width: 0; }
+.card-teams .tm { display: flex; align-items: center; gap: 13px; font-size: 40.6px; font-weight: 600; line-height: 1.25; flex: 1; min-width: 0; }
 .card-teams .tm span { flex: 1; min-width: 0; overflow-wrap: break-word; }
 .card-teams .tm:last-of-type { flex-direction: row-reverse; text-align: right; }
 .card-teams img { width: 84px; height: 84px; object-fit: contain; flex: none; }
 .card-teams img.flag { width: 68px; height: 50px; border-radius: 3px; box-shadow: 0 0 0 1px rgba(128,128,128,.35); }
 .card-teams .tm.tracked { font-weight: 800; }
-.card-teams .vs { color: var(--ink-muted); font-family: "IBM Plex Mono", monospace; font-size: 30px; flex: none; }
+.card-teams .vs { color: var(--ink-muted); font-family: "IBM Plex Mono", monospace; font-size: 21px; flex: none; }
 
 .card-meta { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; margin-top: 16px; }
 .badge {
   display: inline-flex; align-items: center; gap: 7px; border-radius: 999px;
-  padding: 9px 16px; font-size: 36px; font-weight: 600; white-space: nowrap;
+  padding: 9px 16px; font-size: 25.2px; font-weight: 600; white-space: nowrap;
 }
 .badge .bdot { width: 8px; height: 8px; border-radius: 50%; }
 .badge.dazn { background: var(--dazn-bg); color: var(--dazn-ink); }
@@ -170,23 +170,23 @@ main { padding: 12px 16px 0; }
 .star-mirror-row .star-line.star-side-b img.avatar { order: 3; }
 .star-mirror-row .star-line.star-side-b .star-name { order: 2; }
 .star-mirror-row .star-line.star-side-b .squad-num { order: 1; }
-.star-mirror-row .star-name { font-size: 36px; color: var(--ink-muted); line-height: 1.25; text-decoration: none; min-width: 0; }
+.star-mirror-row .star-name { font-size: 25.2px; color: var(--ink-muted); line-height: 1.25; text-decoration: none; min-width: 0; }
 a.star-name:hover, a.star-name:active { text-decoration: underline; }
 .star-mirror-row img.avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; object-position: center top; border: 1.5px solid var(--line); }
-.star-mirror-row .squad-num { display: inline-block; padding: 1px 7px; font-weight: 800; font-size: 30px; color: #fff; background: var(--accent); border-radius: 5px; }
-.star-mirror-row .club-affil { display: grid; grid-template-columns: 36px minmax(0, 1fr) 50px; align-items: start; gap: 6px; font-size: 30px; color: var(--ink-muted); opacity: 0.85; }
+.star-mirror-row .squad-num { display: inline-block; padding: 1px 7px; font-weight: 800; font-size: 21px; color: #fff; background: var(--accent); border-radius: 5px; }
+.star-mirror-row .club-affil { display: grid; grid-template-columns: 36px minmax(0, 1fr) 50px; align-items: start; gap: 6px; font-size: 21px; color: var(--ink-muted); opacity: 0.85; }
 .star-mirror-row .club-affil.star-side-b { grid-template-columns: 50px minmax(0, 1fr) 36px; }
 .star-mirror-row .club-affil.star-side-a .squad-num { justify-self: start; }
 .star-mirror-row .club-affil.star-side-b .squad-num { justify-self: end; }
 .star-mirror-row .club-affil img { width: 36px; height: 36px; object-fit: contain; }
-.star-mirror-row .club-affil .squad-num { font-weight: 800; color: var(--accent); background: none; padding: 0; font-size: 26px; }
+.star-mirror-row .club-affil .squad-num { font-weight: 800; color: var(--accent); background: none; padding: 0; font-size: 18.2px; }
 
-.card-note { margin-top: 14px; font-size: 36px; color: var(--ink-muted); line-height: 1.6; border-top: 1px dashed var(--line); padding-top: 14px; }
+.card-note { margin-top: 14px; font-size: 25.2px; color: var(--ink-muted); line-height: 1.6; border-top: 1px dashed var(--line); padding-top: 14px; }
 
 .video-embed { margin-top: 14px; }
 .video-frame { position: relative; width: 100%; padding-top: 56.25%; border-radius: 12px; overflow: hidden; background: #000; }
 .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.video-caption { margin-top: 7px; font-size: 26px; color: var(--ink-muted); font-family: "IBM Plex Mono", monospace; }
+.video-caption { margin-top: 7px; font-size: 18.2px; color: var(--ink-muted); font-family: "IBM Plex Mono", monospace; }
 
 .video-linkout {
   display: flex; align-items: center; gap: 14px;
@@ -196,14 +196,14 @@ a.star-name:hover, a.star-name:active { text-decoration: underline; }
 .video-linkout-play {
   flex: none; width: 44px; height: 44px; border-radius: 50%;
   background: #fff200; color: #16151f; display: flex; align-items: center; justify-content: center;
-  font-size: 36px;
+  font-size: 25.2px;
 }
 .video-linkout-text { min-width: 0; }
-.video-linkout-title { font-size: 34px; font-weight: 600; overflow-wrap: break-word; }
+.video-linkout-title { font-size: 23.8px; font-weight: 600; overflow-wrap: break-word; }
 .video-linkout .video-caption { color: #b8b6c8; }
 .match-overview {
   background: #2c2c2e; border-radius: 18px; padding: 18px 22px;
-  margin-top: 12px; color: #c8c8c8; font-size: 32px;
+  margin-top: 12px; color: #c8c8c8; font-size: 22.4px;
 }
 .match-overview .mo-list { display: flex; flex-direction: column; gap: 6px; }
 .match-overview .mo-left { text-align: left; }
@@ -214,20 +214,20 @@ a.star-name:hover, a.star-name:active { text-decoration: underline; }
 
 .tbc-card {
   background: var(--surface); border: 1px dashed var(--line); border-radius: 14px;
-  padding: 17px 19px; margin-bottom: 12px; font-size: 40px; color: var(--ink-muted);
+  padding: 17px 19px; margin-bottom: 12px; font-size: 28px; color: var(--ink-muted);
 }
 .tbc-card .card-teams { margin-bottom: 8px; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 9px; }
-.tbc-card .card-teams .tm { font-size: 40px; }
+.tbc-card .card-teams .tm { font-size: 28px; }
 .tbc-card .card-teams img { width: 56px; height: 56px; }
 .tbc-card .card-teams .vs { padding-left: 0; margin: 0; }
-.tbc-card .weekof { font-size: 34px; }
+.tbc-card .weekof { font-size: 23.8px; }
 
 .panel { display: none; }
 .panel.active { display: block; }
 
 footer {
   margin-top: 34px; padding: 19px 16px; border-top: 1px solid var(--line);
-  color: var(--ink-muted); font-size: 34px; line-height: 1.7;
+  color: var(--ink-muted); font-size: 23.8px; line-height: 1.7;
 }
 footer strong { color: var(--ink); }
 footer div + div { margin-top: 6px; }
