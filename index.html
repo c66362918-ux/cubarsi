@@ -379,7 +379,7 @@ function matchOverviewHTML(fixtureId) {
 }
 
 function videoEmbedHTML(v) {
-  if (v.type === 'dazn') {
+  if (v.type === 'dazn' || v.type === 'uefa') {
     return `<a class="video-embed video-linkout" href="${v.url}" target="_blank" rel="noopener">
       <div class="video-linkout-play">▶</div>
       <div class="video-linkout-text">
