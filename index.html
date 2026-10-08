@@ -92,6 +92,16 @@ nav.tabs button {
 nav.tabs button img { width: 64px; height: 64px; object-fit: contain; background: #fff; border-radius: 7px; padding: 3px; }
 nav.tabs button.active { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 
+.monthbar { padding: 2px 16px 16px; }
+.monthwrap { position: relative; display: block; }
+.monthwrap::after {
+  content: "▾"; position: absolute; right: 22px; top: 50%; transform: translateY(-50%);
+  pointer-events: none; font-size: 28px; color: var(--ink-muted); }
+.monthsel {
+  width: 100%; appearance: none; -webkit-appearance: none; font-family: inherit;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 999px;
+  padding: 14px 56px 14px 22px; font-size: 29.4px; font-weight: 600; color: var(--ink); }
+.monthsel:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
 .clubrow {
   display: flex; gap: 10px; overflow-x: auto; padding: 0 16px 17px;
   -ms-overflow-style: none; scrollbar-width: none;
@@ -123,9 +133,15 @@ main { padding: 12px 16px 0; }
 }
 .card.hidden { display: none; }
 .card-head {
-  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
   margin-bottom: 12px;
 }
+.card-when { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; flex: none; }
+.card-date {
+  font-family: "Oswald", sans-serif; font-weight: 600; font-size: 22.4px;
+  color: var(--ink-muted); line-height: 1.15; white-space: nowrap;
+}
+.card-date .wd { font-family: "IBM Plex Mono", monospace; font-size: 18.2px; font-weight: 500; margin-left: 8px; }
 .card-time {
   font-family: "IBM Plex Mono", monospace; font-weight: 700; font-size: 37.8px;
   font-variant-numeric: tabular-nums; color: var(--accent); flex: none;
@@ -241,6 +257,15 @@ img[src*="Tottenham_Hotspur.svg"] { background: #fff; border-radius: 50%; paddin
 <script>
 const WD = ["週日","週一","週二","週三","週四","週五","週六"];
 let activeClub = null;
+let activeMonth = null;
+// Month keys come straight off the stored '+08:00' ISO string, so they are the
+// Taiwan month by construction and never depend on the viewer's device clock.
+function monthKeyOf(iso) { return iso.slice(0, 7); }
+function monthLabel(k) { return `${k.slice(0,4)}年${parseInt(k.slice(5,7),10)}月`; }
+function taipeiMonthNow() {
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Taipei', year: 'numeric', month: '2-digit' })
+    .format(new Date()).slice(0, 7);
+}
 
 function fmtTime(d) { return d.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false }); }
 function dateKey(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
@@ -325,15 +350,18 @@ function renderFixtureCards(container, list) {
     const key = dateKey(d);
     if (key !== lastKey) {
       lastKey = key;
-      html += `<div class="date-hd" data-key="${key}">${fmtDateHeader(d)}<span class="wd">${WD[d.getDay()]}</span></div>`;
+      html += `<div class="date-hd" data-key="${key}" data-month="${monthKeyOf(f.kickoff)}">${fmtDateHeader(d)}<span class="wd">${WD[d.getDay()]}</span></div>`;
     }
     const homeT = f.tracked.includes(f.home);
     const awayT = f.tracked.includes(f.away);
     const stars = genericStarCardHTML(f.home, f.away);
     const note = FIXTURES_NOTES[f.id] || UCL_NOTES[`${zhName(f.home)}|${zhName(f.away)}`] || '';
-    html += `<div class="card" data-tracked="${f.tracked.join(',')}">
+    html += `<div class="card" data-tracked="${f.tracked.join(',')}" data-month="${monthKeyOf(f.kickoff)}">
       <div class="card-head">
-        <span class="card-time">${fmtTime(d)}${f.approx ? '<span class="approx">約</span>' : ''}</span>
+        <span class="card-when">
+          <span class="card-date">${fmtDateHeader(d)}<span class="wd">${WD[d.getDay()]}</span></span>
+          <span class="card-time">${fmtTime(d)}${f.approx ? '<span class="approx">約</span>' : ''}</span>
+        </span>
         ${compTagHTML(f.competition)}
       </div>
       <div class="card-teams">
@@ -410,14 +438,17 @@ function renderGenericCards(container, list, notesDict) {
     const key = dateKey(d);
     if (key !== lastKey) {
       lastKey = key;
-      html += `<div class="date-hd">${fmtDateHeader(d)}<span class="wd">${WD[d.getDay()]}</span></div>`;
+      html += `<div class="date-hd" data-month="${monthKeyOf(m.kickoff)}">${fmtDateHeader(d)}<span class="wd">${WD[d.getDay()]}</span></div>`;
     }
     const stars = genericStarCardHTML(m.home, m.away);
     const note = notesDict ? (notesDict[`${m.home}|${m.away}`] || '') : '';
     const genericVideo = GENERIC_VIDEOS[`${m.home}|${m.away}`];
-    html += `<div class="card">
+    html += `<div class="card" data-month="${monthKeyOf(m.kickoff)}">
       <div class="card-head">
-        <span class="card-time">${fmtTime(d)}</span>
+        <span class="card-when">
+          <span class="card-date">${fmtDateHeader(d)}<span class="wd">${WD[d.getDay()]}</span></span>
+          <span class="card-time">${fmtTime(d)}</span>
+        </span>
       </div>
       <div class="card-teams">
         <div class="tm">${crestTag(m.home)}<span>${zhName(m.home)}</span></div>
@@ -433,30 +464,51 @@ function renderGenericCards(container, list, notesDict) {
   container.innerHTML = html;
 }
 
-function setClubFilter(club) {
-  activeClub = club;
+function setClubFilter(club) { activeClub = club; syncChips(); applyFilters(); }
+function setMonthFilter(month) { activeMonth = month; applyFilters(); }
+
+function syncChips() {
   document.querySelectorAll('.clubchip').forEach(c => {
-    c.classList.toggle('active', (club === null && c.classList.contains('reset')) || c.dataset.club === club);
-  });
-  document.querySelectorAll('#panel-tracked .card').forEach(card => {
-    const show = !club || card.dataset.tracked.split(',').includes(club);
-    card.classList.toggle('hidden', !show);
-  });
-  document.querySelectorAll('#panel-tracked .date-hd').forEach(hd => {
-    const anyVisible = document.querySelector(`#panel-tracked .card[data-key-group="${hd.dataset.key}"]:not(.hidden)`);
-    // fall back: check next siblings until next date-hd
-    let el = hd.nextElementSibling, any = false;
-    while (el && !el.classList.contains('date-hd')) {
-      if (el.classList.contains('card') && !el.classList.contains('hidden')) any = true;
-      el = el.nextElementSibling;
-    }
-    hd.style.display = any ? '' : 'none';
-  });
-  document.querySelectorAll('#panel-tbc .tbc-card').forEach(card => {
-    const show = !club || card.dataset.tracked.split(',').includes(club);
-    card.style.display = show ? '' : 'none';
+    c.classList.toggle('active', (activeClub === null && c.classList.contains('reset')) || c.dataset.club === activeClub);
   });
 }
+
+function applyFilters() {
+  const monthOK = el => !activeMonth || el.dataset.month === activeMonth;
+  document.querySelectorAll('#panel-tracked .card').forEach(card => {
+    const clubOK = !activeClub || card.dataset.tracked.split(',').includes(activeClub);
+    card.classList.toggle('hidden', !(clubOK && monthOK(card)));
+  });
+  document.querySelectorAll('#panel-ucl .card, #panel-unl .card').forEach(card => {
+    card.classList.toggle('hidden', !monthOK(card));
+  });
+  // a date header is shown only while at least one card under it survives both filters
+  ['panel-tracked', 'panel-ucl', 'panel-unl'].forEach(pid => {
+    document.querySelectorAll(`#${pid} .date-hd`).forEach(hd => {
+      let el = hd.nextElementSibling, any = false;
+      while (el && !el.classList.contains('date-hd')) {
+        if (el.classList.contains('card') && !el.classList.contains('hidden')) any = true;
+        el = el.nextElementSibling;
+      }
+      hd.style.display = any ? '' : 'none';
+    });
+  });
+  // 時間未定 has no kickoff, so the month filter cannot apply to it
+  document.querySelectorAll('#panel-tbc .tbc-card').forEach(card => {
+    card.style.display = (!activeClub || card.dataset.tracked.split(',').includes(activeClub)) ? '' : 'none';
+  });
+  updateTabCounts();
+}
+
+function updateTabCounts() {
+  const vis = sel => [...document.querySelectorAll(sel)].filter(e => !e.classList.contains('hidden') && e.style.display !== 'none').length;
+  const set = (tab, n) => { const el = document.querySelector(`nav.tabs button[data-tab="${tab}"] .cnt`); if (el) el.textContent = n; };
+  set('panel-tracked', vis('#panel-tracked .card'));
+  set('panel-tbc', vis('#panel-tbc .tbc-card'));
+  set('panel-ucl', vis('#panel-ucl .card'));
+  set('panel-unl', vis('#panel-unl .card'));
+}
+
 
 function switchTab(id) {
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === id));
@@ -471,12 +523,13 @@ function build() {
     <header class="top">
       <div class="eyebrow">歐洲十一豪門 · 台灣時間賽程 · 手機版</div>
       <h1>愛足球⚽️賽程表</h1>
+      <div class="monthbar"><label class="monthwrap"><select class="monthsel" id="monthsel" aria-label="選擇月份"></select></label></div>
       <div class="callout"><span class="dot"></span><span><strong>Discord 自動提醒已啟用</strong> — 追蹤球隊的比賽開賽前約1小時會自動發送通知。</span></div>
       <nav class="tabs">
-        <button data-tab="panel-tracked" class="active">追蹤球隊 ${FIXTURES.length}</button>
-        <button data-tab="panel-tbc">時間未定 ${TBC.length}</button>
-        <button data-tab="panel-ucl"><img src="${COMPETITION_LOGOS['UEFA Champions League']}" alt="">歐冠 ${UCL_ALL.length}</button>
-        <button data-tab="panel-unl"><img src="${COMPETITION_LOGOS['UEFA Nations League']}" alt="">歐國聯 ${UNL_ALL.length}</button>
+        <button data-tab="panel-tracked" class="active">追蹤球隊 <span class="cnt">${FIXTURES.length}</span></button>
+        <button data-tab="panel-tbc">時間未定 <span class="cnt">${TBC.length}</span></button>
+        <button data-tab="panel-ucl"><img src="${COMPETITION_LOGOS['UEFA Champions League']}" alt="">歐冠 <span class="cnt">${UCL_ALL.length}</span></button>
+        <button data-tab="panel-unl"><img src="${COMPETITION_LOGOS['UEFA Nations League']}" alt="">歐國聯 <span class="cnt">${UNL_ALL.length}</span></button>
       </nav>
     </header>
     <div class="clubrow" id="clubrow"></div>
@@ -517,6 +570,23 @@ function build() {
   document.querySelectorAll('nav.tabs button').forEach(b => {
     b.addEventListener('click', () => switchTab(b.dataset.tab));
   });
+
+  const months = [...new Set([...FIXTURES, ...UCL_ALL, ...UNL_ALL].map(x => monthKeyOf(x.kickoff)))].sort();
+  const nowKey = taipeiMonthNow();
+  // default to the current month; if it holds no matches, fall back to the
+  // most recent month that has some, and only then to the earliest.
+  activeMonth = months.includes(nowKey) ? nowKey
+    : (months.filter(m => m <= nowKey).pop() || months[0] || null);
+  const sel = document.getElementById('monthsel');
+  months.forEach(k => {
+    const o = document.createElement('option');
+    o.value = k;
+    o.textContent = monthLabel(k) + (k === nowKey ? '（本月）' : '');
+    o.selected = (k === activeMonth);
+    sel.appendChild(o);
+  });
+  sel.addEventListener('change', () => setMonthFilter(sel.value));
+  applyFilters();
 }
 
 build();
