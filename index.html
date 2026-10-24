@@ -200,6 +200,9 @@ main { padding: calc(12 * var(--u)) calc(16 * var(--u)) 0; }
 a.star-name:hover, a.star-name:active { text-decoration: underline; }
 .star-mirror-row img.avatar { width: calc(80 * var(--u)); height: calc(80 * var(--u)); border-radius: 50%; object-fit: cover; object-position: center top; border: calc(1.5 * var(--u)) solid var(--line); }
 .star-mirror-row .squad-num { display: inline-block; padding: calc(1 * var(--u)) calc(7 * var(--u)); font-weight: 800; font-size: calc(21 * var(--u)); color: #fff; background: var(--accent); border-radius: calc(5 * var(--u)); }
+.star-mirror-row .avatar-ph { width: calc(80 * var(--u)); height: calc(80 * var(--u)); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: var(--surface-alt); border: calc(1.5 * var(--u)) solid var(--line); color: var(--ink-muted); font-family: "Oswald", sans-serif; font-size: calc(26 * var(--u)); font-weight: 600; }
+.star-mirror-row .star-line.star-side-b .avatar-ph { order: 3; }
 .star-mirror-row .club-affil { display: grid; grid-template-columns: calc(36 * var(--u)) minmax(0, 1fr) calc(50 * var(--u)); align-items: start; gap: calc(6 * var(--u)); font-size: calc(21 * var(--u)); color: var(--ink-muted); opacity: 0.85; }
 .star-mirror-row .club-affil.star-side-b { grid-template-columns: calc(50 * var(--u)) minmax(0, 1fr) calc(36 * var(--u)); }
 .star-mirror-row .club-affil.star-side-a .squad-num { justify-self: start; }
@@ -324,7 +327,13 @@ function badgeHtml(f) {
 function starSideCardHTML(playerName, isCountry, side) {
   if (!playerName) return { line: '', affil: '' };
   const stat = PLAYER_STATS[playerName];
-  const photo = stat && stat.photo ? `<img class="avatar" src="${stat.photo}" alt="" loading="lazy">` : '';
+  // no photo (or a dead one) still fills the avatar column: the row is a 3-column grid, and an empty slot
+  // shifted the name into it and under the shirt-number badge (Vincenzo Grifo, 2026-10-24)
+  const initials = playerName.split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+  const ph = `<span class="avatar avatar-ph">${initials}</span>`;
+  const photo = stat && stat.photo
+    ? `<img class="avatar" src="${stat.photo}" alt="" loading="lazy" onerror="this.outerHTML='${ph.replace(/"/g, '&quot;')}'">`
+    : ph;
   const primaryNum = isCountry ? (stat && stat.national_number) : (stat && stat.number);
   const numHTML = primaryNum ? `<span class="squad-num">${primaryNum}</span>` : '';
   const clubNumHTML = stat && stat.number ? `<span class="squad-num">${stat.number}</span>` : '';
