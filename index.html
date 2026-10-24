@@ -53,7 +53,7 @@ html { background: var(--bg); }
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html { -webkit-text-size-adjust: 100%; }
 body {
-  margin: 0 auto; max-width: calc(980 * var(--u));
+  margin: 0;
   background: var(--bg);
   color: var(--ink);
   font-family: "Noto Sans TC", "IBM Plex Mono", sans-serif;
@@ -102,7 +102,7 @@ nav.tabs button img { width: calc(64 * var(--u)); height: calc(64 * var(--u)); o
 nav.tabs button.active { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 
 .monthbar { padding: calc(2 * var(--u)) calc(16 * var(--u)) calc(16 * var(--u)); }
-.monthwrap { position: relative; display: block; }
+.monthwrap { position: relative; display: block; max-width: calc(916 * var(--u)); }
 .monthwrap::after {
   content: "▾"; position: absolute; right: calc(22 * var(--u)); top: 50%; transform: translateY(-50%);
   pointer-events: none; font-size: calc(28 * var(--u)); color: var(--ink-muted); }
@@ -249,7 +249,13 @@ a.star-name:hover, a.star-name:active { text-decoration: underline; }
 .tbc-card .weekof { font-size: calc(23.8 * var(--u)); }
 
 .panel { display: none; }
-.panel.active { display: block; }
+.panel.active {
+  display: grid; column-gap: calc(15 * var(--u)); align-items: start;
+  /* one column on phones (948u wide) -- exactly the old layout; 2-3 columns on tablets / desktops */
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, calc(900 * var(--u))), 1fr));
+}
+.panel > * { min-width: 0; }
+.panel > .date-hd { grid-column: 1 / -1; }
 
 footer {
   margin-top: calc(34 * var(--u)); padding: calc(19 * var(--u)) calc(16 * var(--u)); border-top: calc(1 * var(--u)) solid var(--line);
@@ -366,7 +372,7 @@ function renderFixtureCards(container, list) {
     const awayT = f.tracked.includes(f.away);
     const stars = genericStarCardHTML(f.home, f.away);
     const note = FIXTURES_NOTES[f.id] || UCL_NOTES[`${zhName(f.home)}|${zhName(f.away)}`] || '';
-    html += `<div class="card" data-tracked="${f.tracked.join(',')}" data-month="${monthKeyOf(f.kickoff)}">
+    html += `<div class="card" data-tracked="${f.tracked.join(',')}" data-month="${monthKeyOf(f.kickoff)}" data-ko="${f.kickoff}">
       <div class="card-head">
         <span class="card-when">
           <span class="card-date">${fmtDateHeader(d)}<span class="wd">${WD[d.getDay()]}</span></span>
@@ -453,7 +459,7 @@ function renderGenericCards(container, list, notesDict) {
     const stars = genericStarCardHTML(m.home, m.away);
     const note = notesDict ? (notesDict[`${m.home}|${m.away}`] || '') : '';
     const genericVideo = GENERIC_VIDEOS[`${m.home}|${m.away}`];
-    html += `<div class="card" data-month="${monthKeyOf(m.kickoff)}">
+    html += `<div class="card" data-month="${monthKeyOf(m.kickoff)}" data-ko="${m.kickoff}">
       <div class="card-head">
         <span class="card-when">
           <span class="card-date">${fmtDateHeader(d)}<span class="wd">${WD[d.getDay()]}</span></span>
@@ -474,8 +480,27 @@ function renderGenericCards(container, list, notesDict) {
   container.innerHTML = html;
 }
 
-function setClubFilter(club) { activeClub = club; syncChips(); applyFilters(); }
-function setMonthFilter(month) { activeMonth = month; applyFilters(); }
+function setClubFilter(club) { activeClub = club; syncChips(); applyFilters(); scrollToNext(); }
+function setMonthFilter(month) { activeMonth = month; applyFilters(); scrollToNext(); }
+
+// A match counts as "next" until ~2 h after kickoff, so one being played right now is where the page lands.
+const LIVE_MS = 2 * 60 * 60 * 1000;
+function scrollToNext() {
+  const panel = document.querySelector('.panel.active');
+  const now = Date.now();
+  const shown = panel ? [...panel.querySelectorAll('.card:not(.hidden)')].filter(c => c.dataset.ko) : [];
+  // this month's games all played (e.g. the UCL tab after matchday) -> the latest one; a past month -> its top
+  const card = shown.find(c => new Date(c.dataset.ko).getTime() + LIVE_MS > now)
+    || (activeMonth === taipeiMonthNow() ? shown[shown.length - 1] : null);
+  if (!card) { window.scrollTo({top: 0, behavior: 'instant'}); return; }
+  // land on the date header when this is the day's first match still shown, so the date is in view
+  let target = card, el = card.previousElementSibling;
+  while (el && el.classList.contains('card') && el.classList.contains('hidden')) el = el.previousElementSibling;
+  if (el && el.classList.contains('date-hd')) target = el;
+  const hdr = document.querySelector('header.top').getBoundingClientRect().height;
+  const y = target.getBoundingClientRect().top + window.scrollY - hdr - 8;
+  window.scrollTo({top: Math.max(0, y), behavior: 'instant'});
+}
 
 function syncChips() {
   document.querySelectorAll('.clubchip').forEach(c => {
@@ -524,7 +549,7 @@ function switchTab(id) {
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === id));
   document.querySelectorAll('nav.tabs button').forEach(b => b.classList.toggle('active', b.dataset.tab === id));
   document.getElementById('clubrow').style.display = (id === 'panel-tracked' || id === 'panel-tbc') ? 'flex' : 'none';
-  window.scrollTo({top: 0, behavior: 'instant'});
+  scrollToNext();
 }
 
 function build() {
@@ -600,5 +625,19 @@ function build() {
   applyFilters();
 }
 
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 build();
+scrollToNext();
+// Web fonts and images keep changing heights above the target for a few seconds after the first pass (measured
+// 31px of drift on desktop), so re-aim whenever the page resizes -- until the viewer scrolls, or 8 s are up.
+let userScrolled = false;
+['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(ev => window.addEventListener(ev, () => { userScrolled = true; }, {once: true, passive: true}));
+const reaim = () => { if (!userScrolled) scrollToNext(); };
+if (document.fonts) document.fonts.ready.then(reaim);
+window.addEventListener('load', reaim);
+if (window.ResizeObserver) {
+  const ro = new ResizeObserver(reaim);
+  ro.observe(document.getElementById('app'));
+  setTimeout(() => ro.disconnect(), 8000);
+}
 </script>
